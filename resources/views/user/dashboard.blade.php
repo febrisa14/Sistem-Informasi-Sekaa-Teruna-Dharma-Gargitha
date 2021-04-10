@@ -151,7 +151,9 @@
                                         </td>
                                     </tr>
                                 @empty
-                                    Tidak Ada Pengumuman
+                                    <tr class="text-center">
+                                        <td>Tidak Ada Pengumuman</td>
+                                    </tr>
                                 @endforelse
                             </tbody>
                         </table>

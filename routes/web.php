@@ -16,6 +16,10 @@ use App\Http\Controllers\Admin\JenisKegiatanController;
 
 require __DIR__.'/auth.php';
 
+Route::get('/', function (){
+    return redirect()->route('login');
+})->middleware('guest');
+
 Route::middleware(['auth'])->group(function () {
 
     //Route User
