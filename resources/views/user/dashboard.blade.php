@@ -121,5 +121,45 @@
                 </div> --}}
             </div>
             <!-- END Overview -->
+
+            <!-- Pengumuman -->
+            <div class="block block-rounded">
+                <div class="block-header block-header-default bg-primary">
+                    <h3 class="block-title text-white">Pengumuman</h3>
+                </div>
+                <div class="block-content">
+                    <!-- Recent Orders Table -->
+                    <div class="table-responsive">
+                        <table class="table table-borderless table-striped table-vcenter" id="table-pengumuman">
+                            <thead>
+                                <tr class="text-center">
+                                    <th>No</th>
+                                    <th>Tanggal</th>
+                                    <th>Nama Kegiatan</th>
+                                    <th>Jenis Kegiatan</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @forelse ($pengumumans as $pengumuman)
+                                    <tr class="text-center">
+                                        <td>{{$loop->iteration}}</td>
+                                        <td>{{$pengumuman->tgl_kegiatan}}</td>
+                                        <td>{{$pengumuman->nama_kegiatan}}</td>
+                                        <td>{{$pengumuman->nama_jenis_kegiatan}}</td>
+                                        <td><a href="{{ route('user.pengumuman.show', ['id' => $pengumuman->kegiatan_id]) }}" class="detail btn btn-sm btn-danger"><i class="far fa-fw fa-eye"></i> Detail Pengumuman</a>
+                                        </td>
+                                    </tr>
+                                @empty
+                                    Tidak Ada Pengumuman
+                                @endforelse
+                            </tbody>
+                        </table>
+                    </div>
+                    <!-- END Recent Orders Table -->
+                </div>
+            </div>
+            <!-- END Recent Orders -->
+
         </div>
         <!-- END Page Content -->

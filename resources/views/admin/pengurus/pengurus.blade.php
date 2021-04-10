@@ -14,7 +14,7 @@
                 </h1>
                 <nav class="flex-sm-00-auto ml-sm-3" aria-label="breadcrumb">
                     <ol class="breadcrumb breadcrumb-alt">
-                        <li class="breadcrumb-item"><a class="link-fx" href="{{ route('dashboard') }}">Dashboard</a></li>
+                        <li class="breadcrumb-item"><a class="link-fx" href="{{ route('admin.dashboard') }}">Dashboard</a></li>
                         <li class="breadcrumb-item" aria-current="page">Pengurus</li>
                     </ol>
                 </nav>
@@ -48,14 +48,14 @@
                                 <th>Jabatan</th>
                                 <th>Umur</th>
                                 @if ($jabatan == 'Ketua STT' || $jabatan == 'Wakil Ketua STT')
-                                    <th width="247px" class="text-center">Action</th>
+                                    <th width="247px" class="text-center"></th>
                                 @endIf
 
                                 @if ($jabatan == 'Sekretaris 1' ||
                                 $jabatan == 'Sekretaris 2' ||
                                 $jabatan == 'Bendahara 1' ||
                                 $jabatan == 'Bendahara 2')
-                                    <th width="65px" class="text-center">Action</th>
+                                    <th width="65px" class="text-center"></th>
                                 @endIf
                             </tr>
                         </thead>

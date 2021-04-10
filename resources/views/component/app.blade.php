@@ -15,6 +15,7 @@
         <!-- END Icons -->
 
         <!-- Stylesheets -->
+        <link rel="stylesheet" href="{{ asset('auth/css/icons.min.css') }}">
 
         <!-- DatePicker CSS -->
         <link rel="stylesheet" href="{{ url('assets/js/plugins/flatpickr/flatpickr.min.css') }}">

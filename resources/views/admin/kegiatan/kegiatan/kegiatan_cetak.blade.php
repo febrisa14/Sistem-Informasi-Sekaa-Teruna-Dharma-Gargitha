@@ -106,27 +106,27 @@ p.deskripsi {
             <div class="garis"></div>
         </header>
         <div id="content">
-            @foreach ($data as $kegiatan)
-            <p class="text-kanan">Denpasar, {{$kegiatan->created_at}}</p>
+            @foreach ($data as $pengumuman)
+            <p class="text-kanan">Denpasar, {{$pengumuman->created_at}}</p>
             <p class="text-kiri">Yth.</p>
             <p class="text-kiri">Seluruh Anggota Sekaa Teruna Dharma Gargitha</p>
             <p class="text-kiri">di tempat</p>
-            <p class="deskripsi">Sehubungan dengan adanya kegiatan/pelaksanaan "<strong><em>{{$kegiatan->nama_kegiatan}}</em></strong>", Kami ingin menyampaikan bahwa untuk seluruh Anggota Sekaa Teruna Dharma Gargitha diharapkan kehadirannya pada:</p>
+            <p class="deskripsi">Sehubungan dengan adanya kegiatan/pelaksanaan "<strong><em>{{$pengumuman->nama_kegiatan}}</em></strong>", Kami ingin menyampaikan bahwa untuk seluruh Anggota Sekaa Teruna Dharma Gargitha diharapkan kehadirannya pada:</p>
                 <table class="table table-bordered">
                     <tr>
                         <td>Tanggal</td>
                         <td>:</td>
-                        <td>{{$kegiatan->tgl_kegiatan}}</td>
+                        <td>{{$pengumuman->tgl_kegiatan}}</td>
                     </tr>
                     <tr>
                         <td>Lokasi</td>
                         <td>:</td>
-                        <td>{{$kegiatan->lokasi}}</td>
+                        <td>{{$pengumuman->lokasi}}</td>
                     </tr>
                     <tr>
                         <td>Jam</td>
                         <td>:</td>
-                        <td>{{$kegiatan->jam_kegiatan}}</td>
+                        <td>{{$pengumuman->jam_kegiatan}}</td>
                     </tr>
                     <tr>
                         <td>Pakaian</td>

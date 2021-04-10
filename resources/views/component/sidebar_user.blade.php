@@ -29,7 +29,7 @@
         <div class="content-side">
             <ul class="nav-main">
                 <li class="nav-main-item">
-                    <a class="nav-main-link {{ Request::is('/') ? 'active' : '' }}" href="{{ route('dashboard') }}">
+                    <a class="nav-main-link {{ Request::is('/') ? 'active' : '' }}" href="{{ route('user.dashboard') }}">
                         <i class="nav-main-link-icon si si-home"></i>
                         <span class="nav-main-link-name">Dashboard</span>
                     </a>
@@ -62,7 +62,7 @@
                     </a>
                 </li>
                 <li class="nav-main-item">
-                    <a class="nav-main-link" href="">
+                    <a class="nav-main-link {{ Request::is('anggota/pengumuman*') ? 'active' : '' }}" href="{{ route('user.pengumuman.index') }}">
                         <i class="nav-main-link-icon fas fa-list"></i>
                         <span class="nav-main-link-name">Pengumuman</span>
                     </a>

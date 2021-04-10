@@ -14,7 +14,7 @@
                 </h1>
                 <nav class="flex-sm-00-auto ml-sm-3" aria-label="breadcrumb">
                     <ol class="breadcrumb breadcrumb-alt">
-                        <li class="breadcrumb-item"><a class="link-fx" href="{{ route('dashboard') }}">Dashboard</a></li>
+                        <li class="breadcrumb-item"><a class="link-fx" href="{{ route('admin.dashboard') }}">Dashboard</a></li>
                         <li class="breadcrumb-item" aria-current="page">Kegiatan</li>
                     </ol>
                 </nav>
@@ -44,7 +44,7 @@
                             <th>Tanggal</th>
                             <th>Nama Kegiatan</th>
                             <th>Jenis Kegiatan</th>
-                            <th>Action</th>
+                            <th></th>
                         </tr>
                     </thead>
                 </table>
@@ -237,19 +237,12 @@ $(document).ready(function(){
                         {
                             Swal.fire('Deleted', data.message ,'success');
                         }
-                        else if (data.success == false)
-                        {
-                            Swal.fire('Gagal', data.message ,'error');
-                        }
                         var table = $('#table-kegiatan').DataTable();
                         table.draw();
                         // location.reload();
-                        }
+                    }
                 });
             }
-            // else {
-            //     Swal.fire('Batal','Batal Menghapus Data Pengurus','error')
-            // }
         });
     });
 

@@ -1,9 +1,10 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
-use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 use App\Models\User;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class DashboardController extends Controller
@@ -15,7 +16,7 @@ class DashboardController extends Controller
         $pengurus = User::where('role','=','Pengurus')->get();
 
         return view('dashboard', [
-            'title' => 'Dashboard | Sistem Informasi Sekaa Teruna Dharma Gargitha',
+            'title' => 'Admin Dashboard | Sistem Informasi Sekaa Teruna Dharma Gargitha',
             'anggota' => $anggota,
             'pengurus' => $pengurus,
             'nama' => $nama

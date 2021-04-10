@@ -14,7 +14,7 @@
                 </h1>
                 <nav class="flex-sm-00-auto ml-sm-3" aria-label="breadcrumb">
                     <ol class="breadcrumb breadcrumb-alt">
-                        <li class="breadcrumb-item"><a class="link-fx" href="{{ route('dashboard') }}">Dashboard</a></li>
+                        <li class="breadcrumb-item"><a class="link-fx" href="{{ route('admin.dashboard') }}">Dashboard</a></li>
                         <li class="breadcrumb-item" aria-current="page">Anggota</li>
                     </ol>
                 </nav>
@@ -59,7 +59,7 @@
                                 <th>Gender</th>
                                 <th>Tempekan</th>
                                 <th>Umur</th>
-                                <th>Action</th>
+                                <th></th>
                             </tr>
                         </thead>
                     </table>

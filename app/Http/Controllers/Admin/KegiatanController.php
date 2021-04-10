@@ -74,7 +74,7 @@ class KegiatanController extends Controller
 
     public function show($id)
     {
-        $kegiatans = Kegiatan::select(
+        $pengumumans = Kegiatan::select(
             'kegiatan_id', 'pakaian', 'users.name' ,'kegiatan.created_at' ,'nama_kegiatan', 'nama_jenis_kegiatan', 'tgl_kegiatan', 'jam_kegiatan', 'lokasi', 'kegiatan.jenis_kegiatan_id'
         )
         ->leftjoin('jenis_kegiatan', 'jenis_kegiatan.jenis_kegiatan_id','=','kegiatan.jenis_kegiatan_id')
@@ -84,7 +84,7 @@ class KegiatanController extends Controller
 
         return view('admin/kegiatan/kegiatan/kegiatan_show', [
             'title' => 'Detail Kegiatan | Sistem Informasi ST. Dharma Gargitha',
-            'kegiatans' => $kegiatans
+            'kegiatans' => $pengumumans
         ]);
     }
 

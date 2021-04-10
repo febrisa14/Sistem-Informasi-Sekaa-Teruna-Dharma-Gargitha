@@ -47,7 +47,12 @@ class JenisKegiatanController extends Controller
 
     public function destroy($id)
     {
-        JenisKegiatan::where('jenis_kegiatan_id', $id)->delete();
+        $delete = JenisKegiatan::where('jenis_kegiatan_id', $id)->delete();
+
+        if (!$delete)
+        {
+            return response()->json();
+        }
 
         return response()->json(['success' => true, 'message' => 'Berhasil Menghapus Jenis Kegiatan.']);
     }

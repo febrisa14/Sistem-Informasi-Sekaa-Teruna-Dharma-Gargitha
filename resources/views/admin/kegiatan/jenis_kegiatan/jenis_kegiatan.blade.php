@@ -14,7 +14,7 @@
                 </h1>
                 <nav class="flex-sm-00-auto ml-sm-3" aria-label="breadcrumb">
                     <ol class="breadcrumb breadcrumb-alt">
-                        <li class="breadcrumb-item"><a class="link-fx" href="{{ route('dashboard') }}">Dashboard</a></li>
+                        <li class="breadcrumb-item"><a class="link-fx" href="{{ route('admin.dashboard') }}">Dashboard</a></li>
                         <li class="breadcrumb-item" aria-current="page">Jenis Kegiatan</li>
                     </ol>
                 </nav>
@@ -43,7 +43,7 @@
                             <th>No</th>
                             <th class="text-center">Nama Jenis Kegiatan</th>
                             <th class="text-center">Tanggal Dibuat</th>
-                            <th width="21%" class="text-center">Action</th>
+                            <th width="21%" class="text-center"></th>
                         </tr>
                     </thead>
                 </table>
@@ -186,14 +186,18 @@ $(document).ready(function(){
                         {
                             Swal.fire('Deleted', data.message ,'success');
                         }
-                        else if (data.success == false)
-                        {
-                            Swal.fire('Gagal', data.message ,'error');
-                        }
                         var table = $('#table-jenis-kegiatan').DataTable();
                         table.draw();
                         // location.reload();
+                    },
+                    error: function (data) {
+                        if (data.responseJSON)
+                        {
+                            Swal.fire('Error', 'Gagal Hapus Data, Karena Data Jenis Kegiatan Masih Digunakan di Table Kegiatan', 'error')
                         }
+                        var table = $('#table-jenis-kegiatan').DataTable();
+                        table.draw();
+                    }
                 });
             }
             // else {

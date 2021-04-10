@@ -2,7 +2,6 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\JenisKegiatanController;
-use App\Http\Controllers\DashboardController;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,9 +21,14 @@ Route::middleware(['auth'])->group(function () {
     //Route User
     Route::middleware(['user'])->prefix('anggota')->name('user.')->group(function () {
 
+        Route::get('/', [App\Http\Controllers\User\DashboardController::class, '__invoke'])->name('dashboard');
+
         Route::middleware(['verified'])->group(function () {
             Route::get('/anggota', [App\Http\Controllers\User\AnggotaController::class, 'index'])->name('anggota.index');
             Route::get('/anggota/{id}', [App\Http\Controllers\User\AnggotaController::class, 'show'])->name('anggota.show');
+
+            Route::get('/pengumuman', [App\Http\Controllers\User\PengumumanController::class, 'index'])->name('pengumuman.index');
+            Route::get('/pengumuman/{id}', [App\Http\Controllers\User\PengumumanController::class, 'show'])->name('pengumuman.show');
 
             Route::get('/pengurus', [App\Http\Controllers\User\PengurusController::class, 'index'])->name('pengurus.index');
             Route::get('/pengurus/{id}', [App\Http\Controllers\User\PengurusController::class, 'show'])->name('pengurus.show');
@@ -40,10 +44,12 @@ Route::middleware(['auth'])->group(function () {
     });
 
     //Route Dashboard
-    Route::get('/', [DashboardController::class, '__invoke'])->name('dashboard');
+
 
     //Route Admin
     Route::middleware(['admin'])->prefix('admin')->name('admin.')->group(function () {
+
+        Route::get('/', [App\Http\Controllers\Admin\DashboardController::class, '__invoke'])->name('dashboard');
 
         Route::middleware(['verified'])->group(function () {
             Route::resource('/pengurus', App\Http\Controllers\Admin\PengurusController::class);

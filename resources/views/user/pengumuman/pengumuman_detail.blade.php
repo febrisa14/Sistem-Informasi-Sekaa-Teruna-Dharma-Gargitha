@@ -13,9 +13,9 @@
                 </h1>
                 <nav class="flex-sm-00-auto ml-sm-3" aria-label="breadcrumb">
                     <ol class="breadcrumb breadcrumb-alt">
-                        <li class="breadcrumb-item"><a class="link-fx" href="{{ route('admin.dashboard') }}">Dashboard</a></li>
-                        <li class="breadcrumb-item"><a class="link-fx" href="{{ route('admin.kegiatan.index') }}">Kegiatan</a></li>
-                        <li class="breadcrumb-item" aria-current="page">Detail Kegiatan</li>
+                        <li class="breadcrumb-item"><a class="link-fx" href="{{ route('user.dashboard') }}">Dashboard</a></li>
+                        <li class="breadcrumb-item"><a class="link-fx" href="{{ route('user.pengumuman.index') }}">Pengumuman</a></li>
+                        <li class="breadcrumb-item" aria-current="page">Detail Pengumuman</li>
                     </ol>
                 </nav>
             </div>
@@ -30,15 +30,14 @@
         @foreach ($pengumumans as $pengumuman)
         <div class="block block-rounded">
                 <div class="block-header border-bottom">
-                    <h3 class="block-title"><small>Informasi Data</small> Kegiatan</h3>
-                    <a href="{{route('admin.kegiatan.cetak', ['id' => $pengumuman->kegiatan_id])}}" id="addKegiatan" class="btn btn-sm btn-alt-primary px-2 py-2">
+                    <h3 class="block-title"><small>Informasi Detail</small> Pengumuman</h3>
+                    {{-- <a href="{{route('admin.kegiatan.cetak', ['id' => $pengumuman->kegiatan_id])}}" id="addKegiatan" class="btn btn-sm btn-alt-primary px-2 py-2">
                         <i class="fa fa-print mr-1"></i> Cetak Kegiatan
-                    </a>
+                    </a> --}}
                 </div>
                 <div class="block-content block-content-full">
                     <!-- Regular -->
                     @csrf
-
                     <div class="row items-push">
                         <div class="col-lg-6 col-xl-6">
                             <div class="form-group">
