@@ -33,7 +33,7 @@
                     </div>
                 </div>
                 <!-- end row -->
-                <div class="row justify-content-center mt-5">
+                <div class="row justify-content-center mt-3">
                     <div class="col-md-8 col-lg-6 col-xl-5">
                         <div class="card">
 
@@ -71,7 +71,7 @@
 
                             </div>
                         </div>
-                        <div class="mt-5 text-center">
+                        <div class="mt-2 text-center">
                             <p> Sistem Informasi ST. Dharma Gargitha © <script>document.write(new Date().getFullYear())</script></p>
                         </div>
 
