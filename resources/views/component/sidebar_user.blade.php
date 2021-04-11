@@ -42,7 +42,12 @@
                     </a>
                     <ul class="nav-main-submenu">
                         <li class="nav-main-item">
-                            <a class="nav-main-link" href="be_comp_loaders.html">
+                            <a class="nav-main-link" href="#">
+                                <span class="nav-main-link-name">Product List</span>
+                            </a>
+                        </li>
+                        <li class="nav-main-item">
+                            <a class="nav-main-link" href="#">
                                 <span class="nav-main-link-name">Detail Pesanan</span>
                             </a>
                         </li>

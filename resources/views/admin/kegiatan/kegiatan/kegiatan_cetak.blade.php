@@ -131,7 +131,7 @@ p.deskripsi {
                     <tr>
                         <td>Pakaian</td>
                         <td>:</td>
-                        <td>{{$kegiatan->pakaian}}</td>
+                        <td>{{$pengumuman->pakaian}}</td>
                     </tr>
                 </table>
             @endforeach

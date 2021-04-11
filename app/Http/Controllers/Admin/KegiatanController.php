@@ -20,6 +20,7 @@ class KegiatanController extends Controller
                 'kegiatan_id', 'nama_kegiatan', 'nama_jenis_kegiatan', 'tgl_kegiatan'
             )
             ->leftjoin('jenis_kegiatan', 'jenis_kegiatan.jenis_kegiatan_id','=','kegiatan.jenis_kegiatan_id')
+            ->orderBy('tgl_kegiatan','DESC')
             ->get();
             return DataTables::of($data)
             ->addIndexColumn()

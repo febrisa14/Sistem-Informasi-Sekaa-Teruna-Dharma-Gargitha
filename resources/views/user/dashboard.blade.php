@@ -133,26 +133,26 @@
                         <table class="table table-borderless table-striped table-vcenter" id="table-pengumuman">
                             <thead>
                                 <tr class="text-center">
-                                    <th>No</th>
+                                    {{-- <th>No</th> --}}
                                     <th>Tanggal</th>
                                     <th>Nama Kegiatan</th>
                                     <th>Jenis Kegiatan</th>
-                                    <th></th>
+                                    <th width="200px"></th>
                                 </tr>
                             </thead>
                             <tbody>
                                 @forelse ($pengumumans as $pengumuman)
-                                    <tr class="text-center">
-                                        <td>{{$loop->iteration}}</td>
-                                        <td>{{$pengumuman->tgl_kegiatan}}</td>
+                                    <tr>
+                                        {{-- <td>{{$loop->iteration}}</td> --}}
+                                        <td class="text-center">{{$pengumuman->tgl_kegiatan}}</td>
                                         <td>{{$pengumuman->nama_kegiatan}}</td>
-                                        <td>{{$pengumuman->nama_jenis_kegiatan}}</td>
-                                        <td><a href="{{ route('user.pengumuman.show', ['id' => $pengumuman->kegiatan_id]) }}" class="detail btn btn-sm btn-danger"><i class="far fa-fw fa-eye"></i> Detail Pengumuman</a>
+                                        <td class="text-center">{{$pengumuman->nama_jenis_kegiatan}}</td>
+                                        <td class="text-center"><a href="{{ route('user.pengumuman.show', ['id' => $pengumuman->kegiatan_id]) }}" class="detail btn btn-sm btn-danger"><i class="far fa-fw fa-eye"></i> Detail Pengumuman</a>
                                         </td>
                                     </tr>
                                 @empty
                                     <tr class="text-center">
-                                        <td>Tidak Ada Pengumuman</td>
+                                        <td colspan="4">Tidak Ada Pengumuman</td>
                                     </tr>
                                 @endforelse
                             </tbody>

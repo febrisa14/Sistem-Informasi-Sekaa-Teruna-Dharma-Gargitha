@@ -47,9 +47,6 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/delete_foto', [App\Http\Controllers\User\ProfileController::class, 'deleteFotoProfile'])->name('delete_foto');
     });
 
-    //Route Dashboard
-
-
     //Route Admin
     Route::middleware(['admin'])->prefix('admin')->name('admin.')->group(function () {
 

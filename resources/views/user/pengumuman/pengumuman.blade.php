@@ -62,8 +62,8 @@ $(document).ready(function(){
 
     $(function() {
         $('#table-pengumuman').DataTable({
-            paging: false,
-            info: false,
+            // paging: false,
+            // info: false,
             processing: true,
             serverSide: true,
             autowidth: true,

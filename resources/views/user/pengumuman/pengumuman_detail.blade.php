@@ -29,59 +29,53 @@
         <!-- For more examples you can check out https://github.com/jzaefferer/jquery-validation -->
         @foreach ($pengumumans as $pengumuman)
         <div class="block block-rounded">
-                <div class="block-header border-bottom">
-                    <h3 class="block-title"><small>Informasi Detail</small> Pengumuman</h3>
-                    {{-- <a href="{{route('admin.kegiatan.cetak', ['id' => $pengumuman->kegiatan_id])}}" id="addKegiatan" class="btn btn-sm btn-alt-primary px-2 py-2">
-                        <i class="fa fa-print mr-1"></i> Cetak Kegiatan
-                    </a> --}}
-                </div>
-                <div class="block-content block-content-full">
-                    <!-- Regular -->
-                    @csrf
-                    <div class="row items-push">
-                        <div class="col-lg-6 col-xl-6">
-                            <div class="form-group">
-                                <label>Nama Kegiatan</label>
-                                <input type="text" class="form-control" id="nama_kegiatan" name="nama_kegiatan" value="{{ $pengumuman->nama_kegiatan }}" disabled>
-                                {{-- <small class="form-text text-muted">Contoh: contoh@gmail.com</small> --}}
-                            </div>
-                            <div class="form-group">
-                                <label>Jenis Kegiatan</label>
-                                <select class="custom-select form-control" id="jenis_kegiatan_id" name="jenis_kegiatan_id" disabled>
-                                    <option value="{{ $pengumuman->jenis_kegiatan_id }}">{{ $pengumuman->nama_jenis_kegiatan }}</option>
-                                </select>
-                            </div>
-                            <div class="form-group">
-                                <label>Tanggal Kegiatan</label>
-                                <input type="text" class="js-flatpickr form-control" id="tgl_kegiatan" value="{{ $pengumuman->tgl_kegiatan }}" name="tgl_kegiatan" data-date-format="d M Y" disabled>
-                            </div>
-                            <div class="form-group">
-                                <label>Jam Kegiatan</label>
-                                <input type="text" class="js-flatpickr form-control" name="jam_kegiatan" data-enable-time="true" data-no-calendar="true" data-date-format="H:i" data-time_24hr="true" value="{{ $pengumuman->jam_kegiatan}}" disabled>
-                            </div>
-                        </div>
-                        <div class="col-lg-6 col-xl-6">
-                            <div class="form-group">
-                                <label>Lokasi Kegiatan</label>
-                                <input type="text" class="form-control" id="lokasi" name="lokasi" value="{{ $pengumuman->lokasi }}" disabled>
-                            </div>
-                            <div class="form-group">
-                                <label>Pakaian</label>
-                                <input type="text" class="form-control" name="pakaian" value="{{ $pengumuman->pakaian }}" disabled>
-                                {{-- <small class="form-text text-muted">Contoh: contoh@gmail.com</small> --}}
-                            </div>
-                            <div class="form-group">
-                                <label>Dibuat Oleh :</label>
-                                <input type="text" class="form-control" name="name" value="{{ $pengumuman->name }}" disabled>
-                            </div>
-                            <div class="form-group">
-                                <label for="alamat">Tanggal Dibuat</label>
-                                <input type="text" class="form-control" value="{{ $pengumuman->created_at }}" name="created_at" data-date-format="d M Y" disabled>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- END Regular -->
+            <div class="block-header border-bottom">
+                <h3 class="block-title"><small>Informasi Detail</small> Pengumuman</h3>
+                {{-- <a href="{{route('admin.kegiatan.cetak', ['id' => $pengumuman->kegiatan_id])}}" id="addKegiatan" class="btn btn-sm btn-alt-primary px-2 py-2">
+                    <i class="fa fa-print mr-1"></i> Cetak Kegiatan
+                </a> --}}
             </div>
+            <div class="block-content block-content-full">
+                <div class="block-content font-size-sm">
+                    <table class="table table-borderless">
+                        <tr>
+                            <td width="140px"><b>Nama Kegiatan</b></td>
+                            <td width="40px">:</td>
+                            <td><span>{{$pengumuman->nama_kegiatan}}</span></td>
+                        </tr>
+                        <tr>
+                            <td><b>Tanggal Kegiatan</b></td>
+                            <td>:</td>
+                            <td><span>{{$pengumuman->tgl_kegiatan}}</span></td>
+                        </tr>
+                        <tr>
+                            <td><b>Jam Kegiatan</b></td>
+                            <td>:</td>
+                            <td><span>{{$pengumuman->jam_kegiatan}} WITA</span></td>
+                        </tr>
+                        <tr>
+                            <td><b>Pakaian</b></td>
+                            <td>:</td>
+                            <td><span>{{$pengumuman->pakaian}}</span></td>
+                        </tr>
+                        <tr>
+                            <td><b>Lokasi Kegiatan</b></td>
+                            <td>:</td>
+                            <td><span>{{$pengumuman->lokasi}}</span></td>
+                        </tr>
+                    </table>
+                    <table class="table table-borderless">
+                        <tr class="bg-primary text-white">
+                            <td><b>Pengumuman ini dibuat pada</b></td>
+                            <td>:</td>
+                            <td><span>{{$pengumuman->created_at}}</span></td>
+                            <td><b>Pengumuman ini dibuat oleh</b></td>
+                            <td>:</td>
+                            <td><span>{{$pengumuman->name}}</span></td>
+                        </tr>
+                    </table>
+                </div>
+            </div><!-- End Block Content -->
         </div>
         @endforeach
     </div>
