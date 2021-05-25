@@ -45,7 +45,7 @@ class BajuController extends Controller
         }
 
         return view('admin/pemesanan/baju/view',[
-            'title' => 'Data Baju Ogoh-Ogoh | Sistem Informasi Sekaa Teruna Dharma Gargitha'
+            'title' => 'Data Baju | Sistem Informasi Sekaa Teruna Dharma Gargitha'
         ]);
     }
 
@@ -57,7 +57,7 @@ class BajuController extends Controller
     public function create()
     {
         return view('admin/pemesanan/baju/create', [
-            'title' => 'Add Data Baju Ogoh-Ogoh | Sistem Informasi Sekaa Teruna Dharma Gargitha'
+            'title' => 'Tambah Data Baju | Sistem Informasi Sekaa Teruna Dharma Gargitha'
         ]);
     }
 
@@ -93,7 +93,7 @@ class BajuController extends Controller
             'foto_baju' => $filename
         ]);
 
-        return redirect()->route('admin.baju_ogoh_ogoh.index');
+        return redirect()->route('admin.baju.index');
     }
 
     /**

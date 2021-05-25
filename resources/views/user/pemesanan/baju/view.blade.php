@@ -48,14 +48,15 @@
                                 <div class="col-md-6">
                                     <!-- Info -->
                                     <div class="d-flex justify-content-between align-items-center">
-                                        <div>
+                                        {{-- <div>
                                             <div class="font-size-sm font-w600 text-success">IN STOCK</div>
                                             <div class="font-size-sm text-muted">Available</div>
-                                        </div>
+                                        </div> --}}
                                         <div class="font-size-h2 font-w700">
-                                            IDR {{number_format($baju->harga)}}
+                                            Rp. {{number_format($baju->harga)}}
                                         </div>
                                     </div>
+                                    <p><b>{{$baju->nama_baju}}</b></p>
                                     <form class="d-flex justify-content-between my-3 border-top border-bottom" action="{{ route('user.order',$baju->baju_id) }}" method="post">
                                         @csrf
                                         <div class="py-3">
@@ -93,3 +94,13 @@
     </main>
     <!-- END Main Container -->
 @endsection
+@push('scripts')
+
+<!-- Script Error SweetAlert2 -->
+@if (Session::has('error'))
+<script>
+    Swal.fire('Error', '{{ Session::get('error') }}' ,'error');
+</script>
+@endif
+
+@endpush

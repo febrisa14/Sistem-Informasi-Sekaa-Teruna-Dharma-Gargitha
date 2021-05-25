@@ -99,6 +99,13 @@
 @stop
 @push('scripts')
 
+<!-- Script Success SweetAlert2 -->
+@if (Session::has('success'))
+<script>
+    Swal.fire('Success', '{{Session::get('success')}}' ,'success');
+</script>
+@endif
+
 <script>
 
 $(document).ready(function(){

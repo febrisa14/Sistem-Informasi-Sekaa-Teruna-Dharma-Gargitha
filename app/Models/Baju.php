@@ -10,7 +10,7 @@ class Baju extends Model
 {
     use HasFactory;
 
-    protected $table = 'baju_ogoh_ogoh';
+    protected $table = 'baju';
 
     protected $primaryKey = 'baju_id';
 

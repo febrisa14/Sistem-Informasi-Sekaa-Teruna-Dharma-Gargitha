@@ -77,6 +77,21 @@
                     </div>
                     <!-- END New Customers -->
                 </div>
+                <div class="col-sm-6 col-xl-6">
+                    <!-- Kas -->
+                    <div class="block block-rounded d-flex flex-column">
+                        <div class="block-content block-content-full flex-grow-1 d-flex justify-content-between align-items-center">
+                            <dl class="mb-0">
+                                <dt class="font-size-h2 font-w700">Rp. {{number_format($saldo)}}</dt>
+                                <dd class="text-muted mb-0">Saldo Kas ST. Dharma Gargitha</dd>
+                            </dl>
+                            <div class="item item-rounded bg-body">
+                                <i class="fas fa-dollar-sign font-size-h3 text-primary"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- END Anggota -->
+                </div>
                 {{-- <div class="col-sm-6 col-xl-3">
                     <!-- Messages -->
                     <div class="block block-rounded d-flex flex-column">

@@ -160,12 +160,12 @@ $(document).ready(function(){
             autowidth: true,
             searching: false,
             columnDefs: [
-                //buat rata tengah dari record umur dan action
-                {targets: 0, className: "text-center"},
-                {targets: 2, className: "text-center"},
-                {targets: 3, className: "text-center"},
-                {targets: 4, className: "text-center"},
-                {targets: 5, className: "text-center"},
+                {targets: 0, className: "text-center", width: "31px"},
+                {targets: 1, width: "209px"},
+                {targets: 2, className: "text-center", width: "94px"},
+                {targets: 3, className: "text-center", width: "132px"},
+                {targets: 4, className: "text-center", width: "58px"},
+                {targets: 5, className: "text-center", width: "222px"},
             ],
             ajax: '{{ route('admin.pengurus.index') }}',
             columns: [

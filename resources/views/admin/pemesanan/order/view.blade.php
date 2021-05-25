@@ -15,7 +15,7 @@
                 <nav class="flex-sm-00-auto ml-sm-3" aria-label="breadcrumb">
                     <ol class="breadcrumb breadcrumb-alt">
                         <li class="breadcrumb-item"><a class="link-fx" href="{{ route('admin.dashboard') }}">Dashboard</a></li>
-                        <li class="breadcrumb-item" aria-current="page">List Pemesan</li>
+                        <li class="breadcrumb-item" aria-current="page">Data Pemesan</li>
                     </ol>
                 </nav>
             </div>
@@ -31,7 +31,7 @@
             <div class="block-header border-bottom">
                 <h3 class="block-title"><small>List Data</small> Pemesan</h3>
                 <a href="" class="btn btn-sm btn-alt-primary px-2 py-2">
-                    <i class="fa fa-plus mr-1"></i> Add Pemesan
+                    <i class="fa fa-plus mr-1"></i> Tambah Pemesan
                 </a>
             </div>
             <div class="block-content block-content-full">
@@ -40,12 +40,11 @@
                 <table width="100%" class="table table-bordered js-dataTable-full-pagination" id="table-pemesan">
                     <thead class="thead-dark">
                         <tr>
-                            <th>No. Pesanan</th>
                             <th>Tanggal</th>
                             <th>Nama</th>
-                            <th>Produk</th>
+                            <th>Baju</th>
                             <th>Size</th>
-                            <th>Total</th>
+                            <th>Harga</th>
                             <th>Status</th>
                             <th></th>
                         </tr>
@@ -154,11 +153,10 @@ $(document).ready(function(){
             autowidth: true,
             ajax: '{{ route('admin.pemesan.index') }}',
             columns: [
-                {data: 'no_pesanan', name: 'no_pesanan'},
                 {data: 'tgl_pesanan', name: 'tgl_pesanan'},
-                {data: 'name', name: 'name'},
-                {data: 'nama_baju', name: 'nama_baju'},
-                {data: 'size', name: 'size'},
+                {data: 'name', name: 'name', orderable: false},
+                {data: 'nama_baju', name: 'nama_baju', orderable: false},
+                {data: 'size', name: 'size', orderable: false},
                 {data: 'total', name: 'total'},
                 {data: 'status', name: 'status'},
                 {data: 'action', name: 'action', orderable: false, searchable: false},

@@ -29,25 +29,25 @@
         <div class="content-side">
             <ul class="nav-main">
                 <li class="nav-main-item">
-                    <a class="nav-main-link {{ Request::is('/') ? 'active' : '' }}" href="{{ route('user.dashboard') }}">
+                    <a class="nav-main-link {{ Request::is('anggota') ? 'active' : '' }}" href="{{ route('user.dashboard') }}">
                         <i class="nav-main-link-icon si si-home"></i>
                         <span class="nav-main-link-name">Dashboard</span>
                     </a>
                 </li>
                 <li class="nav-main-heading">Pemesanan</li>
-                <li class="nav-main-item {{ Request::is('anggota/baju_ogoh_ogoh*') || Request::is('anggota/pesanan_saya') ? 'open' : '' }}">
+                <li class="nav-main-item {{ Request::is('anggota/baju*') || Request::is('anggota/pesanan_saya') ? 'open' : '' }}">
                     <a class="nav-main-link nav-main-link-submenu" data-toggle="submenu" aria-haspopup="true" aria-expanded="false" href="#">
                         <i class="nav-main-link-icon fas fa-money-check-alt"></i>
-                        <span class="nav-main-link-name">Baju Ogoh-Ogoh</span>
+                        <span class="nav-main-link-name">Baju</span>
                     </a>
                     <ul class="nav-main-submenu">
                         <li class="nav-main-item">
-                            <a class="nav-main-link {{ Request::is('anggota/baju_ogoh_ogoh') ? 'active' : '' }}" href="{{route('user.baju.index')}}">
+                            <a class="nav-main-link {{ Request::is('anggota/baju*') ? 'active' : '' }}" href="{{route('user.baju.index')}}">
                                 <span class="nav-main-link-name">List Baju</span>
                             </a>
                         </li>
                         <li class="nav-main-item">
-                            <a class="nav-main-link {{ Request::is('anggota/pesanan_saya') ? 'active' : '' }}" href="{{route('user.pesanan')}}">
+                            <a class="nav-main-link {{ Request::is('anggota/pesanan_saya*') ? 'active' : '' }}" href="{{route('user.pesanan')}}">
                                 <span class="nav-main-link-name">Pesanan Saya</span>
                             </a>
                         </li>
@@ -72,18 +72,18 @@
                         <span class="nav-main-link-name">Pengumuman</span>
                     </a>
                 </li>
-                <li class="nav-main-item">
+                {{-- <li class="nav-main-item">
                     <a class="nav-main-link" href="#">
                         <i class="nav-main-link-icon fas fa-image"></i>
                         <span class="nav-main-link-name">Galeri</span>
                     </a>
-                </li>
-                <li class="nav-main-item">
+                </li> --}}
+                {{-- <li class="nav-main-item">
                     <a class="nav-main-link" href="#">
                         <i class="nav-main-link-icon fas fa-dollar-sign"></i>
                         <span class="nav-main-link-name">Kas</span>
                     </a>
-                </li>
+                </li> --}}
                 <li class="nav-main-heading">Akun</li>
                 <li class="nav-main-item">
                     <a class="nav-main-link {{ Request::is('anggota/profile*') ? 'active' : '' }}" href="{{route('user.profile')}}">

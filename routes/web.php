@@ -37,8 +37,8 @@ Route::middleware(['auth'])->group(function () {
             Route::get('/pengurus', [App\Http\Controllers\User\PengurusController::class, 'index'])->name('pengurus.index');
             Route::get('/pengurus/{id}', [App\Http\Controllers\User\PengurusController::class, 'show'])->name('pengurus.show');
 
-            Route::get('/baju_ogoh_ogoh', [App\Http\Controllers\User\BajuController::class, 'index'])->name('baju.index');
-            Route::get('/baju_ogoh_ogoh/{id}', [App\Http\Controllers\User\BajuController::class, 'show'])->name('baju.show');
+            Route::get('/baju', [App\Http\Controllers\User\BajuController::class, 'index'])->name('baju.index');
+            Route::get('/baju/{id}', [App\Http\Controllers\User\BajuController::class, 'show'])->name('baju.show');
 
             Route::post('order/{id}', [App\Http\Controllers\User\OrderController::class, 'prosesOrder'])->name('order');
 
@@ -62,9 +62,14 @@ Route::middleware(['auth'])->group(function () {
             Route::resource('/pengurus', App\Http\Controllers\Admin\PengurusController::class);
             Route::resource('/anggota', App\Http\Controllers\Admin\AnggotaController::class);
             Route::resource('/jenis_kegiatan', JenisKegiatanController::class)->only(['store','index','destroy']);
-            Route::resource('/baju_ogoh_ogoh', App\Http\Controllers\Admin\BajuController::class);
+            Route::resource('/baju', App\Http\Controllers\Admin\BajuController::class);
             Route::resource('/pemesan', App\Http\Controllers\Admin\OrderController::class);
             Route::resource('/kas/pemasukan', App\Http\Controllers\Admin\PemasukanController::class);
+            Route::resource('/kas/pengeluaran', App\Http\Controllers\Admin\PengeluaranController::class);
+            Route::get('/kas/laporan',[App\Http\Controllers\Admin\CetakLaporanController::class,'cetakFormKas'])->name('kas.laporan');
+            Route::get('/kas/laporan/cetak/{tglawal}/{tglakhir}',[App\Http\Controllers\Admin\CetakLaporanController::class,'cetakLaporanKas'])->name('cetak_laporan_kas');
+            Route::get('/order/laporan',[App\Http\Controllers\Admin\CetakLaporanController::class,'cetakFormPemesanan'])->name('pemesanan.laporan');
+            Route::get('/order/laporan/cetak/{baju_id}/{status}',[App\Http\Controllers\Admin\CetakLaporanController::class,'cetakLaporanPemesanan'])->name('cetak_laporan_pemesanan');
 
             Route::resource('/kegiatan', App\Http\Controllers\Admin\KegiatanController::class);
             Route::get('/kegiatan/{id}/cetak', [App\Http\Controllers\Admin\KegiatanController::class, 'cetak'])->name('kegiatan.cetak');

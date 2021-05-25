@@ -163,10 +163,10 @@ $(document).ready(function(){
             searching: false,
             columnDefs: [
                 {targets: 0, className: "text-center", width: "30px"},
-                {targets: 1, className: "text-center", width: "85px"},
-                {targets: 2, className: "text-center", width: "285px"},
+                {targets: 1, className: "text-center", width: "90px"},
+                {targets: 2, className: "text-center", width: "280px"},
                 {targets: 3, className: "text-center", width: "145px"},
-                {targets: 4, className: "text-center", width: "232px"},
+                {targets: 4, className: "text-center", width: "222px"},
             ],
             ajax: '{{ route('admin.kegiatan.index') }}',
             columns: [

@@ -72,7 +72,7 @@ class AnggotaController extends Controller
     public function create()
     {
         return view('admin/anggota/anggota_add', [
-            'title' => 'Add Data Anggota | Sistem Informasi Sekaa Teruna Dharma Gargitha'
+            'title' => 'Tambah Data Anggota | Sistem Informasi Sekaa Teruna Dharma Gargitha'
         ]);
     }
 

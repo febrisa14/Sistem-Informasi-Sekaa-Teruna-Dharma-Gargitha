@@ -29,7 +29,7 @@
         <div class="content-side">
             <ul class="nav-main">
                 <li class="nav-main-item">
-                    <a class="nav-main-link {{ Request::is('/') ? 'active' : '' }}" href="{{ route('admin.dashboard') }}">
+                    <a class="nav-main-link {{ Request::is('admin') ? 'active' : '' }}" href="{{ route('admin.dashboard') }}">
                         <i class="nav-main-link-icon si si-home"></i>
                         <span class="nav-main-link-name">Dashboard</span>
                     </a>
@@ -83,28 +83,42 @@
                             </a>
                         </li>
                         <li class="nav-main-item">
-                            <a class="nav-main-link" href="#">
+                            <a class="nav-main-link {{ Request::is('admin/kas/pengeluaran*') ? 'active' : '' }}" href="{{ route('admin.pengeluaran.index') }}">
                                 <span class="nav-main-link-name">Pengeluaran</span>
                             </a>
                         </li>
+                        @if (Auth::user()->pengurus->jabatan->nama_jabatan == 'Ketua STT' || Auth::user()->pengurus->jabatan->nama_jabatan == 'Wakil Ketua STT' || Auth::user()->pengurus->jabatan->nama_jabatan == 'Bendahara 1' || Auth::user()->pengurus->jabatan->nama_jabatan == 'Bendahara 2')
+                        <li class="nav-main-item">
+                            <a class="nav-main-link {{ Request::is('admin/kas/laporan*') ? 'active' : '' }}" href="{{ route('admin.kas.laporan') }}">
+                                <span class="nav-main-link-name">Laporan Kas</span>
+                            </a>
+                        </li>
+                        @endif
                     </ul>
                 </li>
-                <li class="nav-main-item {{ Request::is('admin/baju_ogoh_ogoh*') || Request::is('admin/pemesan*') ? 'open' : '' }}">
+                <li class="nav-main-item {{ Request::is('admin/baju*') || Request::is('admin/pemesan*') || Request::is('admin/order*') ? 'open' : '' }}">
                     <a class="nav-main-link nav-main-link-submenu" data-toggle="submenu" aria-haspopup="true" aria-expanded="false" href="#">
                         <i class="nav-main-link-icon fas fa-money-check-alt"></i>
                         <span class="nav-main-link-name">Pemesanan</span>
                     </a>
                     <ul class="nav-main-submenu">
                         <li class="nav-main-item">
-                            <a class="nav-main-link {{ Request::is('admin/baju_ogoh_ogoh*') ? 'active' : '' }}" href="{{ route('admin.baju_ogoh_ogoh.index') }}">
-                                <span class="nav-main-link-name">List Baju</span>
+                            <a class="nav-main-link {{ Request::is('admin/baju*') ? 'active' : '' }}" href="{{ route('admin.baju.index') }}">
+                                <span class="nav-main-link-name">Baju</span>
                             </a>
                         </li>
                         <li class="nav-main-item">
                             <a class="nav-main-link {{ Request::is('admin/pemesan*') ? 'active' : '' }}" href="{{route('admin.pemesan.index')}}">
-                                <span class="nav-main-link-name">List Pemesan</span>
+                                <span class="nav-main-link-name">Pemesan</span>
                             </a>
                         </li>
+                        @if (Auth::user()->pengurus->jabatan->nama_jabatan == 'Ketua STT' || Auth::user()->pengurus->jabatan->nama_jabatan == 'Wakil Ketua STT' || Auth::user()->pengurus->jabatan->nama_jabatan == 'Bendahara 1' || Auth::user()->pengurus->jabatan->nama_jabatan == 'Bendahara 2')
+                        <li class="nav-main-item">
+                            <a class="nav-main-link {{ Request::is('admin/order/laporan*') ? 'active' : '' }}" href="{{ route('admin.pemesanan.laporan') }}">
+                                <span class="nav-main-link-name">Laporan Pemesanan</span>
+                            </a>
+                        </li>
+                        @endIf
                     </ul>
                 </li>
                 <li class="nav-main-heading">Akun</li>

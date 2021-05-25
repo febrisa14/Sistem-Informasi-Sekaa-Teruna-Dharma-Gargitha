@@ -41,7 +41,8 @@
                             <th>Tanggal</th>
                             <th>Nama Pesanan</th>
                             <th>Size</th>
-                            <th></th>
+                            <th>Harga</th>
+                            <th>Status</th>
                         </tr>
                     </thead>
                 </table>
@@ -56,6 +57,13 @@
 @stop
 @push('scripts')
 
+<!-- Script Success SweetAlert2 -->
+@if (Session::has('success'))
+<script>
+    Swal.fire('Success', '{{Session::get('success')}}' ,'success');
+</script>
+@endif
+
 <script>
 
     $(document).ready(function(){
@@ -68,20 +76,14 @@
                 serverSide: true,
                 autowidth: true,
                 searching: false,
-                columnDefs: [
-                    {targets: 0, className: "text-center", width: "30px"},
-                    {targets: 1, className: "text-center", width: "85px"},
-                    {targets: 2, className: "text-center", width: "315px"},
-                    {targets: 3, className: "text-center", width: "175px"},
-                    {targets: 4, className: "text-center", width: "202px"},
-                ],
                 ajax: '{{ route('user.pesanan') }}',
                 columns: [
                     {data: 'no_pesanan', name: 'no_pesanan'},
                     {data: 'tgl_pesanan', name: 'tgl_pesanan', orderable: false, searchable: true},
                     {data: 'nama_baju', name: 'nama_baju'},
                     {data: 'size', name: 'size', orderable: false, searchable: true},
-                    {data: 'action', name: 'action', orderable: false, searchable: false},
+                    {data: 'harga', name: 'harga'},
+                    {data: 'status', name: 'status'},
                 ]
             });
         });

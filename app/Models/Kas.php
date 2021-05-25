@@ -12,6 +12,8 @@ class Kas extends Model
 
     protected $table = 'kas';
 
+    // public $timestamps = false;
+
     protected $primaryKey = 'no_transaksi_kas';
 
     public $incrementing = false;

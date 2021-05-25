@@ -7,6 +7,7 @@ use App\Models\User;
 use App\Models\Kegiatan;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
+use App\Models\Kas;
 
 class DashboardController extends Controller
 {
@@ -23,12 +24,17 @@ class DashboardController extends Controller
         ->take(5)
         ->get();
 
+        $pemasukan = Kas::where('type','=','Pemasukan')->sum('nominal');
+        $pengeluaran = Kas::where('type','=','Pengeluaran')->sum('nominal');
+        $saldo = $pemasukan - $pengeluaran;
+
         return view('dashboard', [
             'title' => 'Anggota Dashboard | Sistem Informasi Sekaa Teruna Dharma Gargitha',
             'anggota' => $anggota,
             'pengurus' => $pengurus,
             'nama' => $nama,
-            'pengumumans' => $pengumumans
+            'pengumumans' => $pengumumans,
+            'saldo' => $saldo
         ]);
     }
 }

@@ -25,16 +25,20 @@ class KegiatanController extends Controller
             return DataTables::of($data)
             ->addIndexColumn()
             ->addColumn('action', function($data){
-                if ($data->tgl_kegiatan < now()->format('d M Y'))
+                if (Auth::User()->pengurus->jabatan->nama_jabatan == 'Bendahara 1'
+                    || Auth::User()->pengurus->jabatan->nama_jabatan == 'Bendahara 2')
                 {
-                    $actionBtn = '<a href="/admin/kegiatan/'.$data->kegiatan_id.'" data-id="'.$data->kegiatan_id.'" class="detail btn btn-sm btn-alt-primary" data-toggle="tooltip" title="Lihat Data"><i class="far fa-fw fa-eye"></i> Lihat</a>';
+                    $actionBtn = '<a href="/admin/kegiatan/'.$data->kegiatan_id.'" data-id="' . $data->kegiatan_id . '" class="detail btn btn-sm btn-alt-primary" data-toggle="tooltip" title="Lihat Data"><i class="far fa-fw fa-eye"></i> Lihat</a>';
                     return $actionBtn;
                 }
-                else
+                else if (Auth::User()->pengurus->jabatan->nama_jabatan == 'Ketua STT'
+                        || Auth::User()->pengurus->jabatan->nama_jabatan == 'Wakil Ketua STT'
+                        || Auth::User()->pengurus->jabatan->nama_jabatan == 'Sekretaris 1' ||
+                        Auth::User()->pengurus->jabatan->nama_jabatan == 'Sekretaris 2')
                 {
-                    $actionBtn = '<a href="/admin/kegiatan/'.$data->kegiatan_id.'" data-id="'.$data->kegiatan_id.'" class="detail btn btn-sm btn-alt-primary" data-toggle="tooltip" title="Lihat Data"><i class="far fa-fw fa-eye"></i> Lihat</a>';
+                    $actionBtn = '<a href="/admin/kegiatan/'.$data->kegiatan_id.'" data-id="' . $data->kegiatan_id . '" class="detail btn btn-sm btn-alt-primary" data-toggle="tooltip" title="Lihat Data"><i class="far fa-fw fa-eye"></i> Lihat</a>';
                     $actionBtn = $actionBtn.' <a href="javascript:void(0)" class="edit btn btn-sm btn-alt-success" data-toggle="tooltip" title="Ubah Data"><i class="fa fa-fw fa-edit"></i> Ubah</a>';
-                    $actionBtn = $actionBtn.' <a href="javascript:void(0)" data-id="'.$data->kegiatan_id.'" class="delete btn btn-sm btn-alt-danger" data-toggle="tooltip" title="Hapus Data"><i class="fa fa-fw fa-trash"></i> Hapus</a>';
+                    $actionBtn = $actionBtn.' <a href="javascript:void(0)" data-id="' . $data->kegiatan_id . '" class="delete btn btn-sm btn-alt-danger" data-toggle="tooltip" title="Hapus Data"><i class="fa fa-fw fa-trash"></i> Hapus</a>';
                     return $actionBtn;
                 }
             })
@@ -79,7 +83,8 @@ class KegiatanController extends Controller
             'kegiatan_id', 'pakaian', 'users.name' ,'kegiatan.created_at' ,'nama_kegiatan', 'nama_jenis_kegiatan', 'tgl_kegiatan', 'jam_kegiatan', 'lokasi', 'kegiatan.jenis_kegiatan_id'
         )
         ->leftjoin('jenis_kegiatan', 'jenis_kegiatan.jenis_kegiatan_id','=','kegiatan.jenis_kegiatan_id')
-        ->leftjoin('users', 'users.user_id','=','kegiatan.user_id')
+        ->leftJoin('pengurus', 'pengurus.pengurus_id', '=', 'kegiatan.pengurus_id')
+        ->leftJoin('users', 'users.user_id', '=', 'pengurus.pengurus_user_id')
         ->where('kegiatan_id', $id)
         ->get();
 

@@ -14,7 +14,7 @@ class BajuController extends Controller
         $baju = Baju::latest()->get();
 
         return view('user/pemesanan/baju/list', [
-            'title' => 'List Baju Ogoh-Ogoh | Sistem Informasi ST. Dharma Gargitha',
+            'title' => 'List Baju | Sistem Informasi ST. Dharma Gargitha',
             'baju' => $baju
         ]);
     }
@@ -24,7 +24,7 @@ class BajuController extends Controller
         $baju = Baju::select('baju_id','nama_baju','deskripsi','foto_baju','harga')->where('baju_id',$id)->first();
 
         return view('user/pemesanan/baju/view', [
-            'title' => 'Detail Baju Ogoh-Ogoh | Sistem Informasi ST. Dharma Gargitha',
+            'title' => 'Detail Baju | Sistem Informasi ST. Dharma Gargitha',
             'baju' => $baju
         ]);
     }

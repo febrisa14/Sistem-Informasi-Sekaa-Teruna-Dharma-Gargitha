@@ -15,7 +15,7 @@
                 <nav class="flex-sm-00-auto ml-sm-3" aria-label="breadcrumb">
                     <ol class="breadcrumb breadcrumb-alt">
                         <li class="breadcrumb-item"><a class="link-fx" href="{{ route('admin.dashboard') }}">Dashboard</a></li>
-                        <li class="breadcrumb-item" aria-current="page">Baju Ogoh-Ogoh</li>
+                        <li class="breadcrumb-item" aria-current="page">Data Baju</li>
                     </ol>
                 </nav>
             </div>
@@ -29,9 +29,9 @@
         <!-- Dynamic Table Full Pagination -->
         <div class="block block-rounded">
             <div class="block-header border-bottom">
-                <h3 class="block-title"><small>List Data</small> Baju Ogoh-Ogoh</h3>
-                <a href="{{route('admin.baju_ogoh_ogoh.create')}}" class="btn btn-sm btn-alt-primary px-2 py-2">
-                    <i class="fa fa-plus mr-1"></i> Add Baju
+                <h3 class="block-title"><small>List Data</small> Baju</h3>
+                <a href="{{route('admin.baju.create')}}" class="btn btn-sm btn-alt-primary px-2 py-2">
+                    <i class="fa fa-plus mr-1"></i> Tambah Baju
                 </a>
             </div>
             <div class="block-content block-content-full">
@@ -40,7 +40,7 @@
                 <table width="100%" class="table table-bordered js-dataTable-full-pagination" id="table-produk">
                     <thead class="thead-dark">
                         <tr>
-                            <th>No</th>
+                            <th>Id. Baju</th>
                             <th>Nama Baju</th>
                             <th>Harga</th>
                             <th></th>
@@ -148,11 +148,14 @@ $(document).ready(function(){
             processing: true,
             serverSide: true,
             autowidth: true,
-            ajax: '{{ route('admin.baju_ogoh_ogoh.index') }}',
+            columnDefs: [
+                {targets: 3, className: "text-center", width: "247px"},
+            ],
+            ajax: '{{ route('admin.baju.index') }}',
             columns: [
-                {data: 'DT_RowIndex', name: 'DT_RowIndex'},
-                {data: 'nama_baju', name: 'nama_baju'},
-                {data: 'harga', name: 'harga'},
+                {data: 'baju_id', name: 'baju_id', orderable: false},
+                {data: 'nama_baju', name: 'nama_baju', orderable: false},
+                {data: 'harga', name: 'harga', render: $.fn.dataTable.render.number('.')},
                 {data: 'action', name: 'action', orderable: false, searchable: false},
             ]
         });

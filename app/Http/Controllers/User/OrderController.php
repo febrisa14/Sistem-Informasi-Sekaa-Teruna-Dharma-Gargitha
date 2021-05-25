@@ -20,7 +20,7 @@ class OrderController extends Controller
 
         $baju = Baju::select('baju_id','harga')->where('baju_id',$id)->first();
 
-        $checkOrder = Order::where('baju_id',$id)->orWhere('anggota_id',Auth::user()->anggota->id)->count();
+        $checkOrder = Order::where('baju_id',$id)->where('anggota_id','=',Auth::user()->anggota->anggota_id)->count();
 
         if ($checkOrder == 0)
         {
@@ -34,18 +34,18 @@ class OrderController extends Controller
                 'total' => $baju->harga
             ]);
 
-            return "Berhasil Melakukan Pesanan";
+            return redirect()->route('user.pesanan')->with('success','Berhasil Melakukan Pesanan');
         }
 
-        return redirect()->back();
+        return redirect()->back()->with('error','Kamu Tidak Dapat Memesan Baju Ini Lebih Dari 2x');
     }
 
     public function pesananSaya(Request $request)
     {
         if ($request->ajax())
         {
-            $data = Order::select('no_pesanan','baju_ogoh_ogoh.nama_baju','tgl_pesanan','size')
-            ->leftJoin('baju_ogoh_ogoh', 'baju_ogoh_ogoh.baju_id', '=', 'pemesanan.baju_id')
+            $data = Order::select('no_pesanan','baju.nama_baju','tgl_pesanan','size','harga','status')
+            ->leftJoin('baju', 'baju.baju_id', '=', 'pemesanan.baju_id')
             ->where('pemesanan.anggota_id','=',Auth::user()->anggota->anggota_id)
             ->get();
             return DataTables::of($data)

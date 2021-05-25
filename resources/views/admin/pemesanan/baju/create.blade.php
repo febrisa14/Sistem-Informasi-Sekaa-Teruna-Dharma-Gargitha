@@ -9,13 +9,13 @@
         <div class="content content-full">
             <div class="d-flex flex-column flex-sm-row justify-content-sm-between align-items-sm-center">
                 <h1 class="flex-sm-fill h3 my-2">
-                    Add Data Baju
+                    Tambah Data Baju
                 </h1>
                 <nav class="flex-sm-00-auto ml-sm-3" aria-label="breadcrumb">
                     <ol class="breadcrumb breadcrumb-alt">
                         <li class="breadcrumb-item"><a class="link-fx" href="{{ route('admin.dashboard') }}">Dashboard</a></li>
-                        <li class="breadcrumb-item"><a class="link-fx" href="{{ route('admin.baju_ogoh_ogoh.index') }}">Baju Ogoh-Ogoh</a></li>
-                        <li class="breadcrumb-item" aria-current="page">Add Baju</li>
+                        <li class="breadcrumb-item"><a class="link-fx" href="{{ route('admin.baju.index') }}">Data Baju</a></li>
+                        <li class="breadcrumb-item" aria-current="page">Tambah Data Baju</li>
                     </ol>
                 </nav>
             </div>
@@ -31,7 +31,7 @@
                 <div class="block-content block-content-full">
                     <!-- Regular -->
                     <h2 class="content-heading border-bottom mb-4 pb-2">Informasi Baju</h2>
-                    <form action="{{route('admin.baju_ogoh_ogoh.store')}}" method="POST" enctype="multipart/form-data">
+                    <form action="{{route('admin.baju.store')}}" method="POST" enctype="multipart/form-data">
                     @csrf
                     <div class="row items-push">
                         <div class="col-lg-6 col-xl-6">
