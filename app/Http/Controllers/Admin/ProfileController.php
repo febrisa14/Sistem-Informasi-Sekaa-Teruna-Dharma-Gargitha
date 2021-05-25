@@ -83,50 +83,53 @@ class ProfileController extends Controller
     public function updateProfile(UpdateProfileRequest $request)
     {
         $emailUpdate = User::where('user_id', Auth::user()->user_id)
-        ->update([
-            'email' => $request->email,
-            'updated_at' => \DB::raw('updated_at')
-        ]);
+        ->select('email')->first(); //ambil email berdasarkan auth user id
+
+        $emailUpdate->email = $request->email; // cek inputan email apakah sama
 
         $user = User::where('user_id', Auth::user()->user_id)
-        ->update([
-            'name' => $request->name,
-            // 'email' => $request->email,
-            'no_telp' => $request->no_telp,
-            'updated_at' => \DB::raw('updated_at')
-        ]);
+        ->select('name','no_telp')->first();
+
+        $user->name = $request->name;
+        $user->no_telp = $request->no_telp;
 
         $pengurus = Pengurus::where('pengurus_user_id', Auth::user()->user_id)
-        ->update([
-            'tgl_lahir' => $request->tgl_lahir,
-            'alamat' => $request->alamat,
-            'jenis_kelamin' => $request->jenis_kelamin,
-            'updated_at' => \DB::raw('updated_at')
-        ]);
+        ->select('tgl_lahir','alamat','jenis_kelamin')->first();
 
-        if ($user > 0 || $pengurus > 0 || $emailUpdate > 0)
+        $pengurus->tgl_lahir = $request->tgl_lahir;
+        $pengurus->alamat = $request->alamat;
+        $pengurus->jenis_kelamin = $request->jenis_kelamin;
+
+        if ($user->isDirty() || $pengurus->isDirty() || $emailUpdate->isDirty())
         {
-            if ($emailUpdate > 0)
+            if ($emailUpdate->isDirty()) // jika inputan nya berubah maka diupdate
             {
                 User::where('user_id', Auth::user()->user_id)
                 ->update([
-                    'email_verified_at' => NULL,
+                    'email' => $request->email,
+                    'email_verified_at' => NULL
                 ]);
             }
 
             User::where('user_id', Auth::user()->user_id)
             ->update([
+                'name' => $request->name,
+                'no_telp' => $request->no_telp,
                 'updated_at' => now()
             ]);
 
             Pengurus::where('pengurus_user_id', Auth::user()->user_id)
             ->update([
+                'tgl_lahir' => $request->tgl_lahir,
+                'alamat' => $request->alamat,
+                'jenis_kelamin' => $request->jenis_kelamin,
                 'updated_at' => now()
             ]);
 
             return back()->with('success', 'Berhasil Update Profile.');
         }
 
+        //jika tidak ada merubah inputan maka muncul pesan
         return back()->with('error', 'Kamu belum merubah data apapun !');
     }
 }

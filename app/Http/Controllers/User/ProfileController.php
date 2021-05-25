@@ -83,49 +83,51 @@ class ProfileController extends Controller
     public function updateProfile(UpdateProfileRequest $request)
     {
         $emailUpdate = User::where('user_id', Auth::user()->user_id)
-        ->update([
-            'email' => $request->email,
-            'updated_at' => \DB::raw('updated_at')
-        ]);
+        ->select('email')->first();
+
+        $emailUpdate->email = $request->email;
 
         $user = User::where('user_id', Auth::user()->user_id)
-        ->update([
-            // 'email' => $request->email,
-            'no_telp' => $request->no_telp,
-            'updated_at' => \DB::raw('updated_at')
-        ]);
+        ->select('no_telp')->first();
+
+        // $user->name = $request->name;
+        $user->no_telp = $request->no_telp;
 
         $anggota = Anggota::where('anggota_user_id', Auth::user()->user_id)
-        ->update([
-            'alamat' => $request->alamat,
-            'tgl_lahir' => $request->tgl_lahir,
-            'jenis_kelamin' => $request->jenis_kelamin,
-            'updated_at' => \DB::raw('updated_at')
-        ]);
+        ->select('alamat','tgl_lahir','jenis_kelamin')->first();
 
-        if ($emailUpdate > 0 || $user > 0 || $anggota > 0)
+        $anggota->alamat = $request->alamat;
+        $anggota->tgl_lahir = $request->tgl_lahir;
+        $anggota->jenis_kelamin = $request->jenis_kelamin;
+
+        if ($user->isDirty() || $anggota->isDirty() || $emailUpdate->isDirty())
         {
-            if ($emailUpdate > 0)
+            if ($emailUpdate->isDirty())
             {
                 User::where('user_id', Auth::user()->user_id)
                 ->update([
+                    'email' => $request->email,
                     'email_verified_at' => NULL,
                 ]);
             }
 
             $user = User::where('user_id', Auth::user()->user_id)
             ->update([
+                'no_telp' => $request->no_telp,
                 'updated_at' => now()
             ]);
 
             $anggota = Anggota::where('anggota_user_id', Auth::user()->user_id)
             ->update([
+                'alamat' => $request->alamat,
+                'tgl_lahir' => $request->tgl_lahir,
+                'jenis_kelamin' => $request->jenis_kelamin,
                 'updated_at' => now()
             ]);
 
-            return back()->with('success', 'Berhasil Update Email.');
+            return back()->with('success', 'Berhasil Update Profile.');
         }
 
-        return back()->with('error', 'Kamu tidak merubah data apapun !');
+        return back()->with('error', 'Kamu belum merubah data apapun !');
     }
 }

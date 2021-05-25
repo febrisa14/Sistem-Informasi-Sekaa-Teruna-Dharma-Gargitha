@@ -65,29 +65,47 @@
                         </li>
                     </ul>
                 </li>
-                <li class="nav-main-item">
+                {{-- <li class="nav-main-item">
                     <a class="nav-main-link" href="#">
                         <i class="nav-main-link-icon fas fa-image"></i>
                         <span class="nav-main-link-name">Galeri</span>
                     </a>
-                </li>
-                <li class="nav-main-item">
-                    <a class="nav-main-link" href="#">
+                </li> --}}
+                <li class="nav-main-item {{ Request::is('admin/kas*') ? 'open' : '' }}">
+                    <a class="nav-main-link nav-main-link-submenu" data-toggle="submenu" aria-haspopup="true" aria-expanded="false" href="#">
                         <i class="nav-main-link-icon fas fa-dollar-sign"></i>
                         <span class="nav-main-link-name">Kas</span>
                     </a>
+                    <ul class="nav-main-submenu">
+                        <li class="nav-main-item">
+                            <a class="nav-main-link {{ Request::is('admin/kas/pemasukan*') ? 'active' : '' }}" href="{{ route('admin.pemasukan.index') }}">
+                                <span class="nav-main-link-name">Pemasukan</span>
+                            </a>
+                        </li>
+                        <li class="nav-main-item">
+                            <a class="nav-main-link" href="#">
+                                <span class="nav-main-link-name">Pengeluaran</span>
+                            </a>
+                        </li>
+                    </ul>
                 </li>
-                <li class="nav-main-item">
-                    <a class="nav-main-link" href="#">
+                <li class="nav-main-item {{ Request::is('admin/baju_ogoh_ogoh*') || Request::is('admin/pemesan*') ? 'open' : '' }}">
+                    <a class="nav-main-link nav-main-link-submenu" data-toggle="submenu" aria-haspopup="true" aria-expanded="false" href="#">
                         <i class="nav-main-link-icon fas fa-money-check-alt"></i>
                         <span class="nav-main-link-name">Pemesanan</span>
                     </a>
-                </li>
-                <li class="nav-main-item">
-                    <a class="nav-main-link" href="#">
-                        <i class="nav-main-link-icon fas fa-file-alt"></i>
-                        <span class="nav-main-link-name">Laporan</span>
-                    </a>
+                    <ul class="nav-main-submenu">
+                        <li class="nav-main-item">
+                            <a class="nav-main-link {{ Request::is('admin/baju_ogoh_ogoh*') ? 'active' : '' }}" href="{{ route('admin.baju_ogoh_ogoh.index') }}">
+                                <span class="nav-main-link-name">List Baju</span>
+                            </a>
+                        </li>
+                        <li class="nav-main-item">
+                            <a class="nav-main-link {{ Request::is('admin/pemesan*') ? 'active' : '' }}" href="{{route('admin.pemesan.index')}}">
+                                <span class="nav-main-link-name">List Pemesan</span>
+                            </a>
+                        </li>
+                    </ul>
                 </li>
                 <li class="nav-main-heading">Akun</li>
                 <li class="nav-main-item">

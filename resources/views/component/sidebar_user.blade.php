@@ -34,21 +34,21 @@
                         <span class="nav-main-link-name">Dashboard</span>
                     </a>
                 </li>
-                <li class="nav-main-heading">Transaksi</li>
-                <li class="nav-main-item">
+                <li class="nav-main-heading">Pemesanan</li>
+                <li class="nav-main-item {{ Request::is('anggota/baju_ogoh_ogoh*') || Request::is('anggota/pesanan_saya') ? 'open' : '' }}">
                     <a class="nav-main-link nav-main-link-submenu" data-toggle="submenu" aria-haspopup="true" aria-expanded="false" href="#">
                         <i class="nav-main-link-icon fas fa-money-check-alt"></i>
-                        <span class="nav-main-link-name">Pemesanan</span>
+                        <span class="nav-main-link-name">Baju Ogoh-Ogoh</span>
                     </a>
                     <ul class="nav-main-submenu">
                         <li class="nav-main-item">
-                            <a class="nav-main-link" href="#">
-                                <span class="nav-main-link-name">Product List</span>
+                            <a class="nav-main-link {{ Request::is('anggota/baju_ogoh_ogoh') ? 'active' : '' }}" href="{{route('user.baju.index')}}">
+                                <span class="nav-main-link-name">List Baju</span>
                             </a>
                         </li>
                         <li class="nav-main-item">
-                            <a class="nav-main-link" href="#">
-                                <span class="nav-main-link-name">Detail Pesanan</span>
+                            <a class="nav-main-link {{ Request::is('anggota/pesanan_saya') ? 'active' : '' }}" href="{{route('user.pesanan')}}">
+                                <span class="nav-main-link-name">Pesanan Saya</span>
                             </a>
                         </li>
                     </ul>

@@ -37,6 +37,12 @@ Route::middleware(['auth'])->group(function () {
             Route::get('/pengurus', [App\Http\Controllers\User\PengurusController::class, 'index'])->name('pengurus.index');
             Route::get('/pengurus/{id}', [App\Http\Controllers\User\PengurusController::class, 'show'])->name('pengurus.show');
 
+            Route::get('/baju_ogoh_ogoh', [App\Http\Controllers\User\BajuController::class, 'index'])->name('baju.index');
+            Route::get('/baju_ogoh_ogoh/{id}', [App\Http\Controllers\User\BajuController::class, 'show'])->name('baju.show');
+
+            Route::post('order/{id}', [App\Http\Controllers\User\OrderController::class, 'prosesOrder'])->name('order');
+
+            Route::get('/pesanan_saya', [App\Http\Controllers\User\OrderController::class, 'pesananSaya'])->name('pesanan');
         });
 
         //Route Profil User
@@ -56,9 +62,13 @@ Route::middleware(['auth'])->group(function () {
             Route::resource('/pengurus', App\Http\Controllers\Admin\PengurusController::class);
             Route::resource('/anggota', App\Http\Controllers\Admin\AnggotaController::class);
             Route::resource('/jenis_kegiatan', JenisKegiatanController::class)->only(['store','index','destroy']);
+            Route::resource('/baju_ogoh_ogoh', App\Http\Controllers\Admin\BajuController::class);
+            Route::resource('/pemesan', App\Http\Controllers\Admin\OrderController::class);
+            Route::resource('/kas/pemasukan', App\Http\Controllers\Admin\PemasukanController::class);
 
             Route::resource('/kegiatan', App\Http\Controllers\Admin\KegiatanController::class);
             Route::get('/kegiatan/{id}/cetak', [App\Http\Controllers\Admin\KegiatanController::class, 'cetak'])->name('kegiatan.cetak');
+
         });
 
         //Route Profile Admin

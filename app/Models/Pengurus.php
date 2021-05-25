@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Jabatan;
 use App\Models\User;
+use App\Models\Kas;
 
 class Pengurus extends Model
 {
@@ -30,4 +31,10 @@ class Pengurus extends Model
     {
         return $this->hasOne(Jabatan::class, 'jabatan_id', 'pengurus_jabatan_id');
     }
+
+    public function Kas()
+    {
+        return $this->hasMany(Kas::class);
+    }
+
 }

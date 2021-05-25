@@ -2,7 +2,7 @@
 
 @section('content')
 <!-- Sign Up Block -->
-<div class="block block-rounded block-themed mt-3 mb-0">
+<div class="block block-rounded block-themed mb-0">
     <div class="block-header bg-primary-dark">
         <h3 class="block-title">SI STDG</h3>
         <div class="block-options">
