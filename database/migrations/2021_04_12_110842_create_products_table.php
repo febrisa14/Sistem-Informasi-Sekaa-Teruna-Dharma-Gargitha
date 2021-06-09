@@ -13,12 +13,13 @@ class CreateBajuOgohOgohTable extends Migration
      */
     public function up()
     {
-        Schema::create('baju_ogoh_ogoh', function (Blueprint $table) {
-            $table->increments('baju_id');
+        Schema::create('baju', function (Blueprint $table) {
+            $table->string('baju_id',20)->primary();
             $table->string('nama_baju');
             $table->text('deskripsi');
             $table->string('foto_baju');
             $table->string('harga');
+            $table->date('tgl_batas_order');
             $table->timestamps();
         });
     }

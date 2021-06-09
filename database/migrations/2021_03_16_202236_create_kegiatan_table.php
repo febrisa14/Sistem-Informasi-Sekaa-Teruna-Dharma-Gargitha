@@ -17,7 +17,7 @@ class CreateKegiatanTable extends Migration
             $table->increments('kegiatan_id');
             $table->string('nama_kegiatan', 100);
             $table->unsignedInteger('jenis_kegiatan_id');
-            $table->string('tgl_kegiatan', 10);
+            $table->date('tgl_kegiatan');
             $table->string('jam_kegiatan', 10);
             $table->string('lokasi', 100);
             $table->timestamps();

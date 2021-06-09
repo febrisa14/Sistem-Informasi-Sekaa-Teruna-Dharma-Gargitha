@@ -14,8 +14,8 @@ class AddKegiatanUserIdToKegiatanTable extends Migration
     public function up()
     {
         Schema::table('kegiatan', function (Blueprint $table) {
-            $table->unsignedInteger('user_id');
-            $table->foreign('user_id')->references('user_id')->on('users');
+            $table->unsignedInteger('pengurus_id');
+            $table->foreign('pengurus')->references('pengurus_id')->on('pengurus');
         });
     }
 

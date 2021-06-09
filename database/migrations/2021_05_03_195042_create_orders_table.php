@@ -14,12 +14,14 @@ class CreateOrdersTable extends Migration
     public function up()
     {
         Schema::create('pemesanan', function (Blueprint $table) {
-            $table->increments('no_pesanan',30);
+            $table->string('no_pesanan',30)->primary();
             $table->unsignedInteger('anggota_id');
             $table->unsignedInteger('baju_id');
             $table->string('size',10);
-            $table->string('tgl_pesanan',10);
+            $table->string('tgl_pesanan',20);
+            $table->string('tgl_bayar',20);
             $table->string('total');
+            $table->string('status',30);
             $table->timestamps();
 
             $table->foreign('anggota_id')->references('anggota_id')->on('anggota')->onDelete('cascade')->onUpdate('cascade');
