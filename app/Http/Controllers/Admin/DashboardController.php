@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Http\Request;
 use App\Models\Kas;
+use DB;
 use Illuminate\Support\Facades\Auth;
 
 class DashboardController extends Controller
@@ -16,8 +17,10 @@ class DashboardController extends Controller
         $anggota = User::where('role','=','Anggota')->get();
         $pengurus = User::where('role','=','Pengurus')->get();
 
-        $pemasukan = Kas::where('type','=','Pemasukan')->sum('nominal');
-        $pengeluaran = Kas::where('type','=','Pengeluaran')->sum('nominal');
+        $pemasukan = DB::table('kas')->where('type','=','Pemasukan')->sum(DB::raw('nominal'));
+        $pengeluaran = DB::table('kas')->where('type','=','Pengeluaran')->sum(DB::raw('nominal'));
+        // $pemasukan = Kas::where('type','=','Pemasukan')->sum('nominal');
+        // $pengeluaran = Kas::where('type','=','Pengeluaran')->sum('nominal');
         $saldo = $pemasukan - $pengeluaran;
 
         return view('dashboard', [
