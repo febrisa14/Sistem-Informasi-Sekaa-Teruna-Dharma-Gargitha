@@ -17,12 +17,11 @@ class DashboardController extends Controller
         $anggota = User::where('role','=','Anggota')->get();
         $pengurus = User::where('role','=','Pengurus')->get();
 
-        $pemasukan = DB::table('kas')->select(DB::raw('SUM(nominal) as total_pemasukan'))->where('type','=','Pemasukan')->get();
-        $pengeluaran = DB::table('kas')->select(DB::raw('SUM(nominal) as total_pengeluaran'))->where('type','=','Pengeluaran')->get();
+        $pemasukan = DB::table('kas')->select(DB::raw('sum(nominal) as total'))->where('type','=','Pemasukan')->get();
+        $pengeluaran = DB::table('kas')->select(DB::raw('sum(nominal) as total'))->where('type','=','Pengeluaran')->get();
         // $pemasukan = Kas::where('type','=','Pemasukan')->sum('nominal');
         // $pengeluaran = Kas::where('type','=','Pengeluaran')->sum('nominal');
-        $saldo = $pemasukan->total_pemasukan - $pengeluaran->total_pengeluaran;
-
+        $saldo = $pemasukan[0]->total - $pengeluaran[0]->total;
         return view('dashboard', [
             'title' => 'Admin Dashboard | Sistem Informasi Sekaa Teruna Dharma Gargitha',
             'anggota' => $anggota,
