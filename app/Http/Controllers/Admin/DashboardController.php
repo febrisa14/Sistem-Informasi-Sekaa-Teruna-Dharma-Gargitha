@@ -17,8 +17,8 @@ class DashboardController extends Controller
         $anggota = User::where('role','=','Anggota')->get();
         $pengurus = User::where('role','=','Pengurus')->get();
 
-        $pemasukan = DB::table('kas')->where('type','=','Pemasukan')->select(DB::raw('SUM(nominal) as total_pemasukan'))->get();
-        $pengeluaran = DB::table('kas')->where('type','=','Pengeluaran')->select(DB::raw('SUM(nominal) as total_pengeluaran'))->get();
+        $pemasukan = DB::table('kas')->select(DB::raw('SUM(nominal) as total_pemasukan'))->where('type','=','Pemasukan')->get();
+        $pengeluaran = DB::table('kas')->select(DB::raw('SUM(nominal) as total_pengeluaran'))->where('type','=','Pengeluaran')->get();
         // $pemasukan = Kas::where('type','=','Pemasukan')->sum('nominal');
         // $pengeluaran = Kas::where('type','=','Pengeluaran')->sum('nominal');
         $saldo = $pemasukan->total_pemasukan - $pengeluaran->total_pengeluaran;
