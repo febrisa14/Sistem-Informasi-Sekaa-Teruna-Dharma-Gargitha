@@ -70,9 +70,9 @@ $(document).ready(function(){
             searching: false,
             columnDefs: [
                 {targets: 0, className: "text-center", width: "30px"},
-                {targets: 1, className: "text-center", width: "85px"},
-                {targets: 2, className: "text-center", width: "315px"},
-                {targets: 3, className: "text-center", width: "175px"},
+                {targets: 1, className: "text-center", width: "145px"},
+                {targets: 2, className: "text-center", width: "280px"},
+                {targets: 3, className: "text-center", width: "150px"},
                 {targets: 4, className: "text-center", width: "202px"},
             ],
             ajax: '{{ route('user.pengumuman.index') }}',

@@ -36,12 +36,12 @@
                     <div class="row items-push">
                         <div class="col-lg-6 col-xl-6">
                             <div class="form-group">
-                                <label for="email">Email <span class="text-danger">*</span></label>
+                                <label for="email">Email</label>
                                 <input type="email" class="form-control" id="email" name="email" placeholder="Masukan Email..">
                                 {{-- <small class="form-text text-muted">Contoh: contoh@gmail.com</small> --}}
                             </div>
                             <div class="form-group">
-                                <label for="password">Password <span class="text-danger">*</span></label>
+                                <label for="password">Password</label>
                                 <input type="password" class="form-control" id="password" name="password" placeholder="Masukan Password..">
                             </div>
                             <div class="form-group">

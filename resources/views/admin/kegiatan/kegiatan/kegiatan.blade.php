@@ -30,9 +30,14 @@
         <div class="block block-rounded">
             <div class="block-header border-bottom">
                 <h3 class="block-title"><small>List Data</small> Kegiatan</h3>
+                @if (Auth::User()->pengurus->jabatan->nama_jabatan == 'Sekretaris 1' ||
+                Auth::User()->pengurus->jabatan->nama_jabatan == 'Sekretaris 2' ||
+                Auth::User()->pengurus->jabatan->nama_jabatan == 'Ketua STT' ||
+                Auth::User()->pengurus->jabatan->nama_jabatan == 'Wakil Ketua STT')
                 <a href="javascript:void(0)" id="addKegiatan" class="btn btn-sm btn-alt-primary px-2 py-2">
-                    <i class="fa fa-plus mr-1"></i> Add Kegiatan
+                    <i class="fa fa-plus mr-1"></i> Tambah Kegiatan
                 </a>
+                @endif
             </div>
             <div class="block-content block-content-full">
                 <!-- DataTables init on table by adding .js-dataTable-full-pagination class, functionality is initialized in js/pages/be_tables_datatables.min.js which was auto compiled from _js/pages/be_tables_datatables.js -->
@@ -58,7 +63,7 @@
                 <div class="modal-content">
                     <div class="block block-rounded block-themed block-transparent mb-0">
                         <div class="block-header bg-primary">
-                            <h3 class="block-title">Add Kegiatan</h3>
+                            <h3 class="block-title">Tambah Kegiatan</h3>
                             <div class="block-options">
                                 <button type="button" class="btn-block-option" data-dismiss="modal" aria-label="Close">
                                     <i class="fa fa-fw fa-times"></i>
@@ -69,7 +74,7 @@
                             <form id="KegiatanForm" name="KegiatanForm">
                                 @csrf
                                 <input type="hidden" name="kegiatan_id" id="kegiatan_id">
-                                <input type="hidden" name="user_id" id="user_id">
+                                <input type="hidden" name="pengurus_id" id="pengurus_id">
                                 <div class="row">
                                     <div class="col-12">
                                         <div class="form-group">
@@ -138,6 +143,20 @@
 @stop
 @push('scripts')
 
+<!-- Script Success SweetAlert2 -->
+@if (Session::has('success'))
+<script>
+    Swal.fire('Success', '{{ Session::get('success') }}' ,'success');
+</script>
+@endif
+
+<!-- Script Error SweetAlert2 -->
+@if (Session::has('error'))
+<script>
+    Swal.fire('Error', '{{ Session::get('error') }}' ,'error');
+</script>
+@endif
+
 <script>
 
 $(document).ready(function(){
@@ -163,8 +182,8 @@ $(document).ready(function(){
             searching: false,
             columnDefs: [
                 {targets: 0, className: "text-center", width: "30px"},
-                {targets: 1, className: "text-center", width: "90px"},
-                {targets: 2, className: "text-center", width: "280px"},
+                {targets: 1, className: "text-center", width: "120px"},
+                {targets: 2, className: "text-center", width: "270px"},
                 {targets: 3, className: "text-center", width: "145px"},
                 {targets: 4, className: "text-center", width: "222px"},
             ],

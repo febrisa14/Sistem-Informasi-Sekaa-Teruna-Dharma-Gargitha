@@ -159,8 +159,8 @@
                                 @forelse ($pengumumans as $pengumuman)
                                     <tr>
                                         {{-- <td>{{$loop->iteration}}</td> --}}
-                                        <td class="text-center">{{$pengumuman->tgl_kegiatan}}</td>
-                                        <td>{{$pengumuman->nama_kegiatan}}</td>
+                                        <td class="text-center">{{date('d M, Y', strtotime($pengumuman->tgl_kegiatan))}}</td>
+                                        <td class="text-center">{{$pengumuman->nama_kegiatan}}</td>
                                         <td class="text-center">{{$pengumuman->nama_jenis_kegiatan}}</td>
                                         <td class="text-center"><a href="{{ route('user.pengumuman.show', ['id' => $pengumuman->kegiatan_id]) }}" class="detail btn btn-sm btn-danger"><i class="far fa-fw fa-eye"></i> Detail Pengumuman</a>
                                         </td>

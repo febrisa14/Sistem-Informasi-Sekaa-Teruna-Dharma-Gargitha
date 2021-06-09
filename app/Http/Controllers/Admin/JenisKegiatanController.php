@@ -10,6 +10,11 @@ use App\Models\JenisKegiatan;
 
 class JenisKegiatanController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('sekretaris')->except('index');
+    }
+
     public function index(Request $request)
     {
         if ($request->ajax())
@@ -21,8 +26,14 @@ class JenisKegiatanController extends Controller
             })
             ->addIndexColumn()
             ->addColumn('action', function($data){
-                $actionBtn = '<a href="javascript:void(0)" data-id="'.$data->jenis_kegiatan_id.'" class="delete btn btn-sm btn-alt-danger" data-toggle="tooltip" title="Hapus Data"><i class="fa fa-fw fa-trash"></i> Hapus</a>';
-                return $actionBtn;
+                if (Auth::User()->pengurus->jabatan->nama_jabatan == 'Sekretaris 1' ||
+                Auth::User()->pengurus->jabatan->nama_jabatan == 'Sekretaris 2' ||
+                Auth::User()->pengurus->jabatan->nama_jabatan == 'Ketua STT' ||
+                Auth::User()->pengurus->jabatan->nama_jabatan == 'Wakil Ketua STT')
+                {
+                    $actionBtn = '<a href="javascript:void(0)" data-id="'.$data->jenis_kegiatan_id.'" class="delete btn btn-sm btn-alt-danger" data-toggle="tooltip" title="Hapus Data"><i class="fa fa-fw fa-trash"></i> Hapus</a>';
+                    return $actionBtn;
+                }
             })
             ->rawColumns(['action'])->make(true);
         }

@@ -8,9 +8,15 @@ use App\Models\Kas;
 use DB;
 use App\Models\Baju;
 use App\Models\Order;
+use App\Models\User;
 
 class CetakLaporanController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('bendahara');
+    }
+
     public function cetakFormKas()
     {
         return view('admin/kas/laporan',[
@@ -47,6 +53,20 @@ class CetakLaporanController extends Controller
         $pengeluaranSeluruh = Kas::where('type','=','Pengeluaran')->sum('nominal');
         $saldoKasTotal = $pemasukanSeluruh - $pengeluaranSeluruh;
 
+        $KetuaSTT = User::select
+        ('users.user_id','users.name','jabatan.nama_jabatan')
+        ->rightjoin('pengurus', 'pengurus.pengurus_user_id','=','users.user_id')
+        ->leftjoin('jabatan', 'jabatan.jabatan_id','=','pengurus.pengurus_jabatan_id')
+        ->where('jabatan.jabatan_id','1')
+        ->first();
+
+        $Bendahara = User::select
+        ('users.user_id','users.name','jabatan.nama_jabatan')
+        ->rightjoin('pengurus', 'pengurus.pengurus_user_id','=','users.user_id')
+        ->leftjoin('jabatan', 'jabatan.jabatan_id','=','pengurus.pengurus_jabatan_id')
+        ->where('jabatan.jabatan_id','5')
+        ->first();
+
         // $pdf = PDF::loadView('admin/kas/cetak', compact('pemasukan','pengeluaran'));
 
         // return $pdf->download('laporan-kas_'.now().'.pdf');
@@ -59,7 +79,9 @@ class CetakLaporanController extends Controller
             'saldoKas' => $saldoKas,
             'tglawal' => $tglawal,
             'tglakhir' => $tglakhir,
-            'saldoKasTotal' => $saldoKasTotal
+            'saldoKasTotal' => $saldoKasTotal,
+            'KetuaSTT' => $KetuaSTT,
+            'Bendahara' => $Bendahara
         ]);
     }
 
@@ -76,7 +98,7 @@ class CetakLaporanController extends Controller
 
     public function cetakLaporanPemesanan($baju_id,$status)
     {
-        $pemesanan = DB::table('pemesanan')->select('users.name','pemesanan.size','pemesanan.status','pemesanan.total')
+        $pemesanan = DB::table('pemesanan')->select('users.name','anggota.jenis_kelamin','pemesanan.size','pemesanan.tgl_pesanan','pemesanan.tgl_bayar','pemesanan.status','pemesanan.total')
         ->leftJoin('anggota', 'anggota.anggota_id', '=', 'pemesanan.anggota_id')
         ->leftJoin('users', 'users.user_id', '=', 'anggota.anggota_user_id')
         ->where('baju_id', '=', $baju_id)->where('status', '=', $status)
@@ -88,6 +110,20 @@ class CetakLaporanController extends Controller
 
         $total = Order::where('baju_id', '=', $baju_id)->where('status', '=', $status)->sum('total');
 
+        $KetuaSTT = User::select
+        ('users.user_id','users.name','jabatan.nama_jabatan')
+        ->rightjoin('pengurus', 'pengurus.pengurus_user_id','=','users.user_id')
+        ->leftjoin('jabatan', 'jabatan.jabatan_id','=','pengurus.pengurus_jabatan_id')
+        ->where('jabatan.jabatan_id','1')
+        ->first();
+
+        $Bendahara = User::select
+        ('users.user_id','users.name','jabatan.nama_jabatan')
+        ->rightjoin('pengurus', 'pengurus.pengurus_user_id','=','users.user_id')
+        ->leftjoin('jabatan', 'jabatan.jabatan_id','=','pengurus.pengurus_jabatan_id')
+        ->where('jabatan.jabatan_id','5')
+        ->first();
+
         // $pdf = PDF::loadView('admin/kas/cetak', compact('pemasukan','pengeluaran'));
 
         // return $pdf->download('laporan-kas_'.now().'.pdf');
@@ -96,7 +132,9 @@ class CetakLaporanController extends Controller
             'pemesanan' => $pemesanan,
             'baju' => $baju,
             'total' => $total,
-            'status' => $status
+            'status' => $status,
+            'KetuaSTT' => $KetuaSTT,
+            'Bendahara' => $Bendahara
         ]);
     }
 }

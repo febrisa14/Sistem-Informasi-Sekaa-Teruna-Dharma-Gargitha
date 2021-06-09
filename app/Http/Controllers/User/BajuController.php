@@ -21,7 +21,7 @@ class BajuController extends Controller
 
     public function show($id)
     {
-        $baju = Baju::select('baju_id','nama_baju','deskripsi','foto_baju','harga')->where('baju_id',$id)->first();
+        $baju = Baju::select('baju_id','nama_baju','deskripsi','foto_baju','harga','tgl_batas_order')->where('baju_id',$id)->first();
 
         return view('user/pemesanan/baju/view', [
             'title' => 'Detail Baju | Sistem Informasi ST. Dharma Gargitha',

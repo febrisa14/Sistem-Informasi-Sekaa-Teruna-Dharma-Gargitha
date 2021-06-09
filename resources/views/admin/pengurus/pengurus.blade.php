@@ -31,9 +31,11 @@
             <div class="block-header border-bottom">
                 <h3 class="block-title"><small>List Data</small> Pengurus</h3>
                 @if ($jabatan == 'Ketua STT' || $jabatan == 'Wakil Ketua STT')
-                <a href="{{ route('admin.pengurus.create') }}" class="btn btn-sm btn-alt-primary px-2 py-2">
-                    <i class="fa fa-plus mr-1"></i> Add Pengurus
-                </a>
+                    @if ($jumlah != 6)
+                        <a href="{{ route('admin.pengurus.create') }}" class="btn btn-sm btn-alt-primary px-2 py-2">
+                            <i class="fa fa-plus mr-1"></i> Tambah Pengurus
+                        </a>
+                    @endif
                 @endIf
             </div>
             <div class="block-content block-content-full">
@@ -210,9 +212,9 @@ $(document).ready(function(){
                         {
                             Swal.fire('Gagal', data.message ,'error');
                         }
-                        var table = $('#table-pengurus').DataTable();
-                        table.draw();
-                        // location.reload();
+                        // var table = $('#table-pengurus').DataTable();
+                        // table.draw();
+                        location.reload();
                         }
                 });
             }

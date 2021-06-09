@@ -10,12 +10,12 @@
         <div class="content content-full">
             <div class="d-flex flex-column flex-sm-row justify-content-sm-between align-items-sm-center">
                 <h1 class="flex-sm-fill h3 my-2">
-                    Data Pesanan
+                    Tambah Pengurus
                 </h1>
                 <nav class="flex-sm-00-auto ml-sm-3" aria-label="breadcrumb">
                     <ol class="breadcrumb breadcrumb-alt">
-                        <li class="breadcrumb-item"><a class="link-fx" href="{{ route('user.dashboard') }}">Dashboard</a></li>
-                        <li class="breadcrumb-item" aria-current="page">Pesanan Saya</li>
+                        <li class="breadcrumb-item"><a class="link-fx" href="{{ route('admin.pengurus.index') }}">Pengurus</a></li>
+                        <li class="breadcrumb-item" aria-current="page">Tambah Pengurus</li>
                     </ol>
                 </nav>
             </div>
@@ -29,24 +29,24 @@
         <!-- Dynamic Table Full Pagination -->
         <div class="block block-rounded">
             <div class="block-header border-bottom">
-                <h3 class="block-title"><small>List Data</small> Pesanan</h3>
+                <h3 class="block-title"><small>Pilih Data</small> Anggota</h3>
             </div>
+
             <div class="block-content block-content-full">
                 <!-- DataTables init on table by adding .js-dataTable-full-pagination class, functionality is initialized in js/pages/be_tables_datatables.min.js which was auto compiled from _js/pages/be_tables_datatables.js -->
                 <div class="table-responsive">
-                <table width="100%" class="table table-bordered js-dataTable-full-pagination" id="table-pesanan">
-                    <thead class="thead-light">
-                        <tr>
-                            <th>No Pesanan</th>
-                            <th>Tanggal</th>
-                            <th>Nama Pesanan</th>
-                            <th>Size</th>
-                            <th>Harga</th>
-                            <th>Status</th>
-                            <th></th>
-                        </tr>
-                    </thead>
-                </table>
+                    <table width="100%" class="table table-bordered js-dataTable-full-pagination" id="table-anggota">
+                        <thead class="thead-dark">
+                            <tr>
+                                <th>No</th>
+                                <th>Nama</th>
+                                <th>Gender</th>
+                                <th>Tempekan</th>
+                                <th>Umur</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                    </table>
                 </div>
             </div>
         </div>
@@ -67,40 +67,44 @@
 
 <script>
 
-    $(document).ready(function(){
+$(document).ready(function(){
 
-        $.ajaxSetup({
+    $.ajaxSetup({
         headers: {
             'X-CSRF-TOKEN' : $('meta[name="csrf-token"]').attr('content')
         }
-        });
+    });
 
-        $(function() {
-            $('#table-pesanan').DataTable({
-                // paging: false,
-                // info: false,
-                processing: true,
-                serverSide: true,
-                autowidth: true,
-                searching: false,
-                ajax: '{{ route('user.pesanan') }}',
-                columns: [
-                    {data: 'no_pesanan', name: 'no_pesanan'},
-                    {data: 'tgl_pesanan', name: 'tgl_pesanan', orderable: false},
-                    {data: 'nama_baju', name: 'nama_baju', orderable: false},
-                    {data: 'size', name: 'size', orderable: false},
-                    {data: 'total', name: 'total'},
-                    {data: 'status', name: 'status'},
-                    {data: 'action', name: 'action', orderable: false, searchable: true},
-                ]
-            });
+    $(function() {
+        var table_anggota = $('#table-anggota').DataTable({
+            processing: true,
+            serverSide: true,
+            autowidth: true,
+            columnDefs: [
+                {targets: 0, className: "text-center", width: "32px"},
+                {targets: 1, width: "224px"},
+                {targets: 2, className: "text-center", width: "94px"},
+                {targets: 3, className: "text-center", width: "104px"},
+                {targets: 4, className: "text-center", width: "60px"},
+                {targets: 5, className: "text-center", width: "232px"},
+            ],
+            ajax: '{{ route('admin.pengurus.create') }}',
+            columns: [
+                  {data: 'DT_RowIndex', name: 'DT_RowIndex'},
+                  {data: 'name', name: 'name'},
+                  {data: 'jenis_kelamin', name: 'jenis_kelamin', orderable: false, searchable: true},
+                  {data: 'tempekan', name: 'tempekan', orderable: false, searchable: true},
+                  {data: 'umur', name: 'umur'},
+                  {data: 'action', name: 'action', orderable: false, searchable: false},
+            ]
         });
+    });
 
-        $(document).on('click', '.delete', function (){
+    $(document).on('click', '.pilih', function (){
         var id = $(this).data("id");
         Swal.fire({
-            title: 'Hapus Data Pesanan?',
-            text: 'Klik "Iya" untuk menghapus data',
+            title: 'Jadikan Anggota Sebagai Pengurus?',
+            text: 'Klik "Iya" untuk melanjutkan',
             icon: 'warning',
             showCancelButton: true,
             confirmButtonColor: '#d33',
@@ -112,19 +116,20 @@
                 $.ajax({
                     type: "post",
                     dataType: 'json',
-                    url: "{{ route('user.pesanan.destroy','') }}/"+id,
+                    url: "{{ route('admin.pengurus.transfer','') }}/"+id,
                     success: function (data) {
                         if (data.success == true)
                         {
-                            Swal.fire('Deleted', data.message ,'success');
+                            Swal.fire('Success', data.message ,'success');
                         }
                         else if (data.success == false)
                         {
                             Swal.fire('Gagal', data.message ,'error');
                         }
-                        var table = $('#table-pesanan').DataTable();
-                        table.draw();
+                        // var table = $('#table-pengurus').DataTable();
+                        // table.draw();
                         // location.reload();
+                        window.location.href = '/admin/pengurus'
                         }
                 });
             }
@@ -134,8 +139,7 @@
         });
     });
 
-    });
+});
 
 </script>
-
 @endpush

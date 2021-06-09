@@ -9,13 +9,13 @@
         <div class="content content-full">
             <div class="d-flex flex-column flex-sm-row justify-content-sm-between align-items-sm-center">
                 <h1 class="flex-sm-fill h3 my-2">
-                    Tambah Data Baju
+                    Ubah Data Pesanan
                 </h1>
                 <nav class="flex-sm-00-auto ml-sm-3" aria-label="breadcrumb">
                     <ol class="breadcrumb breadcrumb-alt">
-                        <li class="breadcrumb-item"><a class="link-fx" href="{{ route('admin.dashboard') }}">Dashboard</a></li>
-                        <li class="breadcrumb-item"><a class="link-fx" href="{{ route('admin.baju.index') }}">Data Baju</a></li>
-                        <li class="breadcrumb-item" aria-current="page">Tambah Data Baju</li>
+                        <li class="breadcrumb-item"><a class="link-fx" href="{{ route('user.dashboard') }}">Dashboard</a></li>
+                        <li class="breadcrumb-item"><a class="link-fx" href="{{ route('user.pesanan') }}">Pesanan Saya</a></li>
+                        <li class="breadcrumb-item" aria-current="page">Ubah Pesanan</li>
                     </ol>
                 </nav>
             </div>
@@ -30,37 +30,39 @@
             <div class="block block-rounded">
                 <div class="block-content block-content-full">
                     <!-- Regular -->
-                    <h2 class="content-heading border-bottom mb-4 pb-2">Informasi Baju</h2>
-                    <form action="{{route('admin.baju.store')}}" method="POST" enctype="multipart/form-data">
-                    @csrf
+
+                    <h2 class="content-heading border-bottom mb-4 pb-2">Informasi Pemesanan</h2>
+                    <form action="{{ route('user.pesanan.update',$pemesan->no_pesanan) }}" method="POST">
+                        @method('PUT')
+                        @csrf
                     <div class="row items-push">
                         <div class="col-lg-6 col-xl-6">
                             <div class="form-group">
-                                <label>Nama Baju <span class="text-danger">*</span></label>
-                                <input type="text" class="form-control" name="nama_baju" placeholder="Masukan Nama Baju..">
-                                {{-- <small class="form-text text-muted">Contoh: contoh@gmail.com</small> --}}
+                                <label for="nama">Nama Pemesan</label>
+                                <input type="text" class="form-control" name="anggota_id" value="{{ $pemesan->name }}" readonly>
                             </div>
                             <div class="form-group">
-                                <label>Deskripsi Baju</label>
-                                <textarea class="form-control" name="deskripsi" rows="2" placeholder="Masukan Deskripsi..."></textarea>
+                                <label>Tanggal Pemesanan</label>
+                                <input type="text" class="form-control" id="tgl_pesanan" name="tgl_pesanan" placeholder="Contoh: 09-04-2021" data-date-format="d-m-Y" data-id=minDateToday value="{{$pemesan->tgl_pesanan}}" readonly>
                             </div>
                             <div class="form-group">
-                                <label for="nama">Harga</label>
-                                <input type="text" class="form-control" name="harga" placeholder="Masukan Harga...">
+                                <label for="nama">Nama Baju</label>
+                                <input type="text" class="form-control" name="baju_id" value="{{ $pemesan->nama_baju }}" readonly>
                             </div>
                         </div>
                         <div class="col-lg-6 col-xl-6">
                             <div class="form-group">
-                                <label for="nama">Tanggal Batas Order</label>
-                                <input type="text" class="js-flatpickr form-control bg-white" name="tgl_batas_order" data-date-format="Y-m-d" placeholder="Y-m-d">
+                                <label for="tempekan">Size Baju</label>
+                                <select class="custom-select" name="size">
+                                    <option {{ $pemesan->size == "M" ? 'selected' : ''}} value="M">M</option>
+                                    <option {{ $pemesan->size == "L" ? 'selected' : ''}} value="L">L</option>
+                                    <option {{ $pemesan->size == "XL" ? 'selected' : ''}} value="XL">XL</option>
+                                    <option {{ $pemesan->size == "XXL" ? 'selected' : ''}} value="XXL">XXL</option>
+                                </select>
                             </div>
                             <div class="form-group">
-                                <label for="no_telp">Foto</label>
-                                <div class="custom-file">
-                                    <!-- Populating custom file input label with the selected filename (data-toggle="custom-file-input" is initialized in Helpers.coreBootstrapCustomFileInput()) -->
-                                    <input type="file" class="custom-file-input" data-toggle="custom-file-input" id="avatar" name="foto_baju">
-                                    <label class="custom-file-label" for="one-profile-edit-avatar">Input foto disini...</label>
-                                </div>
+                                <label for="nama">Total Bayar</label>
+                                <input type="text" class="form-control" name="harga" value="{{ $pemesan->total }}" readonly>
                             </div>
                         </div>
                     </div>
@@ -69,7 +71,7 @@
                     <div class="row items-push">
                         <div class="col-lg-8 offset-lg-5">
                             <button type="submit" data-toggle="click-ripple" class="btn btn-primary">
-                                <i class="fa fa-save mr-1"></i> Simpan
+                                <i class="fa fa-save mr-1"></i> Update
                             </button>
                         </div>
                     </div>
@@ -84,6 +86,20 @@
 @stop
 
 @push('scripts')
+
+<!-- Script Success SweetAlert2 -->
+@if (Session::has('success'))
+<script>
+    Swal.fire('Success', '{{ Session::get('success') }}' ,'success');
+</script>
+@endif
+
+<!-- Script Error SweetAlert2 -->
+@if (Session::has('error'))
+<script>
+    Swal.fire('Error', '{{ Session::get('error') }}' ,'error');
+</script>
+@endif
 
 <!-- iziToast Error Tampil -->
 @if ($errors->any)

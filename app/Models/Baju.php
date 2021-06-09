@@ -17,7 +17,7 @@ class Baju extends Model
     public $incrementing = false;
 
     protected $fillable = [
-        'baju_id','nama_baju', 'harga', 'deskripsi', 'foto_baju'
+        'baju_id','nama_baju', 'harga', 'deskripsi', 'foto_baju','tgl_batas_order'
     ];
 
     public function order()

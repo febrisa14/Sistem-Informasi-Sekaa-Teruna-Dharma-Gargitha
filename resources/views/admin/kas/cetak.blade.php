@@ -14,13 +14,19 @@
         background: white;
         height: 297mm;
     }
+
+    .content{
+        margin-top: -20px;
+        margin-right: 40px;
+    }
+
     .logo {
         width: 80px;
         display: block;
         margin-left: 210px;
     }
     .garis {
-    width: 150mm;
+    width: 190mm;
     margin-right: auto;
     margin-left: auto;
     height: 2px;
@@ -38,6 +44,7 @@
 
 <body>
     <div class="page">
+        <div class="content">
         <table class="kop-surat table-borderless">
             <tr>
                 <td rowspan="4"><img class="logo" src="{{ url('/assets/media/logo/logo-login.png') }}"></td>
@@ -81,7 +88,7 @@
         <br>
         <table class="center" style="margin-bottom: 5px;">
             <tr>
-                <td style="font-size: 12pt; text-align:left;"><b>Pemasukan</b></td>
+                <td style="font-size: 13pt; text-align:left;"><b>Pemasukan</b></td>
             </tr>
         </table>
         <table class="center table-bordered">
@@ -92,11 +99,11 @@
                 <th style="padding: 10px 60px;">Nominal</th>
             </tr>
             @foreach ($pemasukan as $pemasukan)
-            <tr style="text-align: center;">
-                <td>{{$loop->iteration}}.</td>
+            <tr>
+                <td style="text-align: center;">{{$loop->iteration}}.</td>
                 <td>{{$pemasukan->deskripsi}}</td>
-                <td>{{date('d M, Y',strtotime($pemasukan->tgl_transaksi))}}</td>
-                <td>Rp. {{number_format($pemasukan->nominal)}}</td>
+                <td style="text-align: center;">{{date('d M, Y',strtotime($pemasukan->tgl_transaksi))}}</td>
+                <td style="text-align: center;">Rp. {{number_format($pemasukan->nominal)}}</td>
             </tr>
             @endforeach
             <tr>
@@ -106,7 +113,7 @@
         </table>
         <table class="center" style="margin-bottom: 5px; margin-top: 20px;">
             <tr>
-                <td style="font-size: 12pt; text-align:left;"><b>Pengeluaran</b></td>
+                <td style="font-size: 13pt; text-align:left;"><b>Pengeluaran</b></td>
             </tr>
         </table>
         <table class="center table-bordered">
@@ -117,11 +124,11 @@
                 <th style="padding: 10px 60px;">Nominal</th>
             </tr>
             @foreach ($pengeluaran as $pengeluaran)
-            <tr style="text-align: center;">
-                <td>{{$loop->iteration}}.</td>
+            <tr>
+                <td style="text-align: center;">{{$loop->iteration}}.</td>
                 <td>{{$pengeluaran->deskripsi}}</td>
-                <td>{{date('d M, Y',strtotime($pengeluaran->tgl_transaksi))}}</td>
-                <td>Rp. {{number_format($pengeluaran->nominal)}}</td>
+                <td style="text-align: center;">{{date('d M, Y',strtotime($pengeluaran->tgl_transaksi))}}</td>
+                <td style="text-align: center;">Rp. {{number_format($pengeluaran->nominal)}}</td>
             </tr>
             @endforeach
             <tr>
@@ -130,7 +137,7 @@
             </tr>
         </table>
         <br>
-        <table style="margin-left: 80px;">
+        <table style="margin-left: 60px;">
             <tr>
                 <td>Saldo Kas pada periode ini</td>
                 <td>:</td>
@@ -142,6 +149,30 @@
                 <td><b>Rp. {{number_format($saldoKasTotal)}}</b></td>
             </tr>
         </table>
+        <br>
+        <table class="table table-borderless" style="margin-bottom: 5px;">
+            <tr>
+                <td style="font-size: 11pt; text-align:right;">Denpasar, {{now()->format('d M Y')}}</td>
+            </tr>
+        </table>
+        <br>
+        <table class="table table-borderless" style="margin-bottom: 5px;">
+            <tr>
+                <td style="font-size: 11pt; text-align:left;"><b>Ketua STT</b></td>
+                <td style="font-size: 11pt; text-align:right;"><b>Bendahara</b></td>
+            </tr>
+            <tr>
+                <td style="font-size: 11pt; text-align:left;"></td>
+            </tr>
+            <tr>
+                <td style="font-size: 11pt; text-align:left;"></td>
+            </tr>
+            <tr>
+                <td style="font-size: 11pt; text-align:left;">{{$KetuaSTT->name}}</td>
+                <td style="font-size: 11pt; text-align:right;">{{$Bendahara->name}}</td>
+            </tr>
+        </table>
+    </div>
     </div>
 
     <script>

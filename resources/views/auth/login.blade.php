@@ -6,7 +6,7 @@
     <div class="block-header bg-primary-dark">
         <h3 class="block-title">SI STDG</h3>
         <div class="block-options">
-            <a class="btn-block-option font-size-md" href="{{ route('password.request') }}">Lupa Password?</a>
+            {{-- <a class="btn-block-option font-size-md" href="{{ route('password.request') }}">Lupa Password?</a> --}}
             <a class="btn-block-option" href="{{ route('register') }}" data-toggle="tooltip" data-placement="right" title="Register Anggota">
                 <i class="fa fa-user-plus"></i>
             </a>

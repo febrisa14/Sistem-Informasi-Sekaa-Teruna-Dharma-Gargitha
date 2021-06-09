@@ -37,7 +37,7 @@
                 <div class="row">
                     <div class="col-6">
                         <div class="form-group">
-                            <label for="tempekan">Baju</label>
+                            <label for="tempekan">Nama Baju</label>
                             <select class="custom-select" id="baju_id" name="baju_id">
                                 <option value="">- Pilih -</option>
                                 @forelse ($baju as $baju)

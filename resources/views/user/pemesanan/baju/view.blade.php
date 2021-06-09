@@ -6,23 +6,6 @@
 
         <!-- Page Content -->
         <div class="content">
-            <!-- Toggle Side Content -->
-            <!-- Class Toggle, functionality initialized in Helpers.coreToggleClass() -->
-            <div class="d-xl-none push">
-                <div class="row gutters-tiny">
-                    <div class="col-6">
-                        <button type="button" class="btn btn-light btn-block" data-toggle="class-toggle" data-target=".js-ecom-div-nav" data-class="d-none">
-                            <i class="fa fa-fw fa-bars text-muted mr-1"></i> Navigation
-                        </button>
-                    </div>
-                    <div class="col-6">
-                        <button type="button" class="btn btn-light btn-block" data-toggle="class-toggle" data-target=".js-ecom-div-cart" data-class="d-none">
-                            <i class="fa fa-fw fa-shopping-cart text-muted mr-1"></i> Cart (3)
-                        </button>
-                    </div>
-                </div>
-            </div>
-            <!-- END Toggle Side Content -->
 
             <div class="row">
                 <div class="col-xl-2"></div>
@@ -30,6 +13,13 @@
                     <!-- Product -->
                     <div class="block block-rounded">
                         <div class="block-content">
+                            <div class="alert alert-success alert-dismissable" role="alert">
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                                <h3 class="alert-heading h5 my-1">Informasi</h3>
+                                <p class="mb-0">Baju ini hanya dapat dipesan sampai tanggal <b>{{date('d M, Y', strtotime($baju->tgl_batas_order))}}</b> !</p>
+                            </div>
                             <!-- Vitals -->
                             <div class="row items-push">
                                 <div class="col-md-6">
@@ -75,11 +65,8 @@
                                             </button>
                                         </div>
                                     </form>
-                                    @if ($baju->deskripsi != NULL)
-                                        <p>{{$baju->deskripsi}}</p>
-                                    @else
-                                        <p>Dolor posuere proin blandit accumsan senectus netus nullam curae, ornare laoreet adipiscing luctus mauris adipiscing pretium eget fermentum, tristique lobortis est ut metus lobortis tortor tincidunt himenaeos habitant quis dictumst proin odio sagittis purus mi, nec taciti vestibulum quis in sit varius lorem sit metus mi.</p>
-                                    @endif
+                                    <label>Deskripsi</label>
+                                    <textarea class="form-control bg-white" name="deskripsi" rows="5" readonly>{{$baju->deskripsi}}</textarea>
                                     <!-- END Info -->
                                 </div>
                             </div>

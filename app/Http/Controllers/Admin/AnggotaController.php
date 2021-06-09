@@ -15,6 +15,11 @@ use App\Http\Requests\UpdateAnggotaRequest;
 
 class AnggotaController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('sekretaris')->except('index','show');
+    }
+
     public function index(Request $request)
     {
         if ($request->ajax()) {
@@ -24,21 +29,31 @@ class AnggotaController extends Controller
                     ('users.user_id', 'users.name', 'anggota.jenis_kelamin', 'anggota.tempekan', 'anggota.umur')
                     ->rightJoin('anggota', 'anggota.anggota_user_id', '=', 'users.user_id')
                     ->where('tempekan', $request->tempekan)
+                    ->orderBy('users.created_at', 'DESC')
                     ->get();
             } else {
                 $data = User::select
                     ('users.user_id', 'users.name', 'anggota.jenis_kelamin', 'anggota.tempekan', 'anggota.umur')
                     ->rightJoin('anggota', 'anggota.anggota_user_id', '=', 'users.user_id')
-                    // ->orderBy('users.created_at', 'DESC')
+                    ->orderBy('users.created_at', 'DESC')
                     ->get();
             }
             return DataTables::of($data)
                 ->addIndexColumn()
                 ->addColumn('action', function ($data) {
-                    if (Auth::User()->user_id != $data->user_id) {
+                    if (Auth::User()->pengurus->jabatan->nama_jabatan == 'Sekretaris 1' ||
+                    Auth::User()->pengurus->jabatan->nama_jabatan == 'Sekretaris 2' ||
+                    Auth::User()->pengurus->jabatan->nama_jabatan == 'Ketua STT' ||
+                    Auth::User()->pengurus->jabatan->nama_jabatan == 'Wakil Ketua STT')
+                    {
                         $actionBtn = '<a href="javascript:void(0)" data-id="' . $data->user_id . '" class="detail btn btn-sm btn-alt-primary" data-toggle="tooltip" title="Show Data"><i class="far fa-fw fa-eye"></i> Lihat</a>';
                         $actionBtn = $actionBtn . ' <a href="/admin/anggota/'.$data->user_id.'/edit" data-id="' . $data->user_id . '"class="editdata btn btn-sm btn-alt-success" data-toggle="tooltip" title="Edit Data"><i class="fa fa-fw fa-edit"></i> Ubah</a>';
                         $actionBtn = $actionBtn . ' <a href="javascript:void(0)" data-id="' . $data->user_id . '" class="delete btn btn-sm btn-alt-danger" data-toggle="tooltip" title="Delete Data"><i class="fa fa-fw fa-trash"></i> Hapus</a>';
+                        return $actionBtn;
+                    }
+                    else if (Auth::User()->pengurus->jabatan->nama_jabatan == 'Bendahara 1' || Auth::User()->pengurus->jabatan->nama_jabatan == 'Bendahara 2')
+                    {
+                        $actionBtn = '<a href="javascript:void(0)" data-id="' . $data->user_id . '" class="detail btn btn-sm btn-alt-primary" data-toggle="tooltip" title="Show Data"><i class="far fa-fw fa-eye"></i> Lihat Anggota</a>';
                         return $actionBtn;
                     }
                 })

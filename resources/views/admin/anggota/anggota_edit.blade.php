@@ -80,6 +80,7 @@
                             <div class="form-group">
                                 <label for="tempekan">Tempekan</label>
                                 <select class="custom-select" id="tempekan" name="tempekan">
+                                    <option {{ $user->tempekan == "Null" ? 'selected' : ''}} value="0">- Pilih -</option>
                                     <option {{ $user->tempekan == "Kauh" ? 'selected' : ''}} value="Kauh">Kauh</option>
                                     <option {{ $user->tempekan == "Kubu" ? 'selected' : ''}} value="Kubu">Kubu</option>
                                     <option {{ $user->tempekan == "Kangin" ? 'selected' : ''}} value="Kangin">Kangin</option>

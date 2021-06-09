@@ -20,6 +20,9 @@ class PengumumanController extends Controller
             ->orderBy('tgl_kegiatan','DESC')
             ->get();
             return DataTables::of($data)
+            ->editColumn('tgl_kegiatan', function ($data){
+                return date('d M, Y', strtotime($data->tgl_kegiatan));
+            })
             ->addIndexColumn()
             ->addColumn('action', function($data){
                 $actionBtn = '<a href="/anggota/pengumuman/'.$data->kegiatan_id.'" data-id="'.$data->kegiatan_id.'" class="detail btn btn-sm btn-alt-primary" data-toggle="tooltip" title="Lihat Data"><i class="far fa-fw fa-eye"></i> Detail Pengumuman</a>';

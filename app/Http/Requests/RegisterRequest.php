@@ -30,7 +30,6 @@ class RegisterRequest extends FormRequest
             'no_telp' => 'required',
             'tgl_lahir' => 'required',
             'jenis_kelamin' => 'required',
-            'tempekan' => 'required',
             'alamat' => 'required'
         ];
     }

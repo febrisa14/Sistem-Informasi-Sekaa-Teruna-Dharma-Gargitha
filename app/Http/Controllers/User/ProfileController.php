@@ -22,7 +22,7 @@ class ProfileController extends Controller
                 'users.name',
                 'users.avatar',
                 'users.no_telp',
-                'users.email_verified_at',
+                // 'users.email_verified_at',
                 'anggota.alamat',
                 'anggota.tgl_lahir',
                 'anggota.jenis_kelamin',
@@ -107,7 +107,7 @@ class ProfileController extends Controller
                 User::where('user_id', Auth::user()->user_id)
                 ->update([
                     'email' => $request->email,
-                    'email_verified_at' => NULL,
+                    // 'email_verified_at' => NULL,
                 ]);
             }
 

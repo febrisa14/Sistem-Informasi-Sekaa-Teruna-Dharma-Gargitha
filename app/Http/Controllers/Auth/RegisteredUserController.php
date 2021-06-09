@@ -8,7 +8,7 @@ use App\Models\Anggota;
 use Hash;
 use Carbon\Carbon;
 use App\Http\Requests\RegisterRequest;
-use Illuminate\Auth\Events\Registered;
+// use Illuminate\Auth\Events\Registered;
 
 class RegisteredUserController extends Controller
 {
@@ -40,7 +40,7 @@ class RegisteredUserController extends Controller
             'alamat' => $request->alamat
         ]);
 
-        event(new Registered($users));
+        // event(new Registered($users));
 
         return redirect()->route('login')->with('success', 'Berhasil Register.');
     }

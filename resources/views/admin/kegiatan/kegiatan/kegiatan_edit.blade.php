@@ -9,13 +9,13 @@
         <div class="content content-full">
             <div class="d-flex flex-column flex-sm-row justify-content-sm-between align-items-sm-center">
                 <h1 class="flex-sm-fill h3 my-2">
-                    Tambah Data Baju
+                    Ubah Data Kegiatan
                 </h1>
                 <nav class="flex-sm-00-auto ml-sm-3" aria-label="breadcrumb">
                     <ol class="breadcrumb breadcrumb-alt">
                         <li class="breadcrumb-item"><a class="link-fx" href="{{ route('admin.dashboard') }}">Dashboard</a></li>
-                        <li class="breadcrumb-item"><a class="link-fx" href="{{ route('admin.baju.index') }}">Data Baju</a></li>
-                        <li class="breadcrumb-item" aria-current="page">Tambah Data Baju</li>
+                        <li class="breadcrumb-item"><a class="link-fx" href="{{ route('admin.kegiatan.index') }}">Kegiatan</a></li>
+                        <li class="breadcrumb-item" aria-current="page">Ubah Kegiatan</li>
                     </ol>
                 </nav>
             </div>
@@ -30,37 +30,33 @@
             <div class="block block-rounded">
                 <div class="block-content block-content-full">
                     <!-- Regular -->
-                    <h2 class="content-heading border-bottom mb-4 pb-2">Informasi Baju</h2>
-                    <form action="{{route('admin.baju.store')}}" method="POST" enctype="multipart/form-data">
-                    @csrf
+                    <h2 class="content-heading border-bottom mb-4 pb-2">Informasi Kegiatan</h2>
+                    <form action="{{ route('admin.kegiatan.update',$kegiatan->kegiatan_id) }}" method="POST">
+                        @method('PUT')
+                        @csrf
                     <div class="row items-push">
                         <div class="col-lg-6 col-xl-6">
                             <div class="form-group">
-                                <label>Nama Baju <span class="text-danger">*</span></label>
-                                <input type="text" class="form-control" name="nama_baju" placeholder="Masukan Nama Baju..">
-                                {{-- <small class="form-text text-muted">Contoh: contoh@gmail.com</small> --}}
+                                <label for="nama">Nama Kegiatan</label>
+                                <input type="text" class="form-control" name="nama_kegiatan" value="{{ $kegiatan->nama_kegiatan }}" placeholder="Masukan Nama Lengkap...">
                             </div>
                             <div class="form-group">
-                                <label>Deskripsi Baju</label>
-                                <textarea class="form-control" name="deskripsi" rows="2" placeholder="Masukan Deskripsi..."></textarea>
+                                <label>Tanggal Kegiatan</label>
+                                <input type="text" class="js-flatpickr form-control bg-white" id="tgl_kegiatan" name="tgl_kegiatan" placeholder="Contoh: 09-04-2021" data-date-format="Y-m-d" data-id=minDateToday value="{{$kegiatan->tgl_kegiatan}}">
                             </div>
                             <div class="form-group">
-                                <label for="nama">Harga</label>
-                                <input type="text" class="form-control" name="harga" placeholder="Masukan Harga...">
+                                <label>Jam Kegiatan</label>
+                                <input type="text" class="js-flatpickr form-control bg-white" id="jam_kegiatan" name="jam_kegiatan" data-enable-time="true" data-no-calendar="true" data-date-format="H:i" data-time_24hr="true" placeholder="Contoh: 19:00" value="{{$kegiatan->jam_kegiatan}}">
                             </div>
                         </div>
                         <div class="col-lg-6 col-xl-6">
                             <div class="form-group">
-                                <label for="nama">Tanggal Batas Order</label>
-                                <input type="text" class="js-flatpickr form-control bg-white" name="tgl_batas_order" data-date-format="Y-m-d" placeholder="Y-m-d">
+                                <label>Pakaian</label>
+                                <input type="text" class="form-control" name="pakaian" placeholder="Masukan Pakaian...." value="{{$kegiatan->pakaian}}">
                             </div>
                             <div class="form-group">
-                                <label for="no_telp">Foto</label>
-                                <div class="custom-file">
-                                    <!-- Populating custom file input label with the selected filename (data-toggle="custom-file-input" is initialized in Helpers.coreBootstrapCustomFileInput()) -->
-                                    <input type="file" class="custom-file-input" data-toggle="custom-file-input" id="avatar" name="foto_baju">
-                                    <label class="custom-file-label" for="one-profile-edit-avatar">Input foto disini...</label>
-                                </div>
+                                <label>Lokasi Kegiatan</label>
+                                <input type="text" class="form-control" id="lokasi" name="lokasi" placeholder="Masukan Lokasi Kegiatan...." value="{{$kegiatan->lokasi}}">
                             </div>
                         </div>
                     </div>
@@ -69,7 +65,7 @@
                     <div class="row items-push">
                         <div class="col-lg-8 offset-lg-5">
                             <button type="submit" data-toggle="click-ripple" class="btn btn-primary">
-                                <i class="fa fa-save mr-1"></i> Simpan
+                                <i class="fa fa-save mr-1"></i> Update
                             </button>
                         </div>
                     </div>
@@ -84,6 +80,20 @@
 @stop
 
 @push('scripts')
+
+<!-- Script Success SweetAlert2 -->
+@if (Session::has('success'))
+<script>
+    Swal.fire('Success', '{{ Session::get('success') }}' ,'success');
+</script>
+@endif
+
+<!-- Script Error SweetAlert2 -->
+@if (Session::has('error'))
+<script>
+    Swal.fire('Error', '{{ Session::get('error') }}' ,'error');
+</script>
+@endif
 
 <!-- iziToast Error Tampil -->
 @if ($errors->any)

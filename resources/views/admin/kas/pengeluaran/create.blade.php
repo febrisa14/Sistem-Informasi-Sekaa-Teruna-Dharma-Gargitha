@@ -9,13 +9,13 @@
         <div class="content content-full">
             <div class="d-flex flex-column flex-sm-row justify-content-sm-between align-items-sm-center">
                 <h1 class="flex-sm-fill h3 my-2">
-                    Add Data Pengeluaran
+                    Tambah Data Pengeluaran
                 </h1>
                 <nav class="flex-sm-00-auto ml-sm-3" aria-label="breadcrumb">
                     <ol class="breadcrumb breadcrumb-alt">
                         <li class="breadcrumb-item"><a class="link-fx" href="{{ route('admin.dashboard') }}">Dashboard</a></li>
                         <li class="breadcrumb-item"><a class="link-fx" href="{{ route('admin.pengeluaran.index') }}">Pemasukan</a></li>
-                        <li class="breadcrumb-item" aria-current="page">Add Pengeluaran</li>
+                        <li class="breadcrumb-item" aria-current="page">Tambah Pengeluaran</li>
                     </ol>
                 </nav>
             </div>

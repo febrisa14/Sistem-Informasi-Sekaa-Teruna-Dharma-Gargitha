@@ -30,9 +30,14 @@
         <div class="block block-rounded">
             <div class="block-header border-bottom">
                 <h3 class="block-title"><small>List Data</small> Anggota</h3>
-                <a href="{{ route('admin.anggota.create') }}" id="addAnggota" class="btn btn-sm btn-alt-primary px-2 py-2">
-                    <i class="fa fa-plus mr-1"></i> Tambah Anggota
-                </a>
+                @if (Auth::User()->pengurus->jabatan->nama_jabatan == 'Sekretaris 1' ||
+                Auth::User()->pengurus->jabatan->nama_jabatan == 'Sekretaris 2' ||
+                Auth::User()->pengurus->jabatan->nama_jabatan == 'Ketua STT' ||
+                Auth::User()->pengurus->jabatan->nama_jabatan == 'Wakil Ketua STT')
+                    <a href="{{ route('admin.anggota.create') }}" id="addAnggota" class="btn btn-sm btn-alt-primary px-2 py-2">
+                        <i class="fa fa-plus mr-1"></i> Tambah Anggota
+                    </a>
+                @endif
             </div>
 
             <div class="block-content block-content-full">

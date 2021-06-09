@@ -33,7 +33,7 @@
                         @endforeach
                     @endif
                     <div class="form-group mb-2">
-                        <label for="email">Email</label>
+                        <label for="email">Email <span class="text-danger">*</span></label>
                         <div class="input-group">
                             <div class="input-group-prepend">
                               <div class="input-group-text">
@@ -44,7 +44,7 @@
                         </div>
                     </div>
                     <div class="form-group mb-3">
-                        <label for="password">Password</label>
+                        <label for="password">Password <span class="text-danger">*</span></label>
                         <div class="input-group">
                             <div class="input-group-prepend">
                               <div class="input-group-text">
@@ -80,13 +80,14 @@
                         <input type="text" class="form-control @error('no_telp') is-invalid @enderror" id="no_telp" name="no_telp" placeholder="Masukan No. Telp..." value="{{ old('no_telp') }}">
                     </div>
                     <div class="form-group mb-4">
-                        <label for="tempekan">Nama Tempekan <span class="text-danger">*</span></label>
+                        <label for="tempekan">Nama Tempekan</label>
                         <select class="custom-select @error('tempekan') is-invalid @enderror" id="tempekan" name="tempekan">
                             <option value="">- Pilih -</option>
                             <option value="Kauh">Kauh</option>
                             <option value="Kangin">Kangin</option>
                             <option value="Kubu">Kubu</option>
                         </select>
+                        <small class="form-text text-danger"><strong>* Kosongkan Tempekan Jika Tidak Tahu</strong></small>
                     </div>
                 </div>
                 <div class="form-group row">

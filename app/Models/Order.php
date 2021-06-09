@@ -17,7 +17,7 @@ class Order extends Model
     public $incrementing = false;
 
     protected $fillable = [
-        'no_pesanan','anggota_id', 'baju_id', 'size','status','tgl_pesanan','total'
+        'no_pesanan','anggota_id', 'baju_id', 'size','status','tgl_pesanan','total','tgl_bayar'
     ];
 
     public function baju()

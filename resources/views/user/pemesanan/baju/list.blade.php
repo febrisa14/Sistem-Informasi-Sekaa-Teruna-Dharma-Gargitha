@@ -47,7 +47,7 @@
                             </div>
                             <div class="block-content">
                                 <div class="mb-2">
-                                    <div class="h4 font-w600 text-success text-center">IDR {{number_format($baju->harga,2)}}</div>
+                                    <div class="h4 font-w600 text-success text-center">Rp. {{number_format($baju->harga)}}</div>
                                     <a class="h4" href="{{route('user.baju.show', ['id' => $baju->baju_id])}}">{{$baju->nama_baju}}</a>
                                 </div>
                                 <p class="font-size-sm text-muted"></p>

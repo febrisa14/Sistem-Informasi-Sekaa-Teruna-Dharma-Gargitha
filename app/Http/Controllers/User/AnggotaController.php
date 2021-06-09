@@ -26,6 +26,7 @@ class AnggotaController extends Controller
                 )
                 ->rightJoin('anggota', 'anggota.anggota_user_id','=','users.user_id')
                 ->where('tempekan', $request->tempekan)
+                ->orderBy('users.created_at', 'DESC')
                 ->get();
             }
             else
@@ -39,6 +40,7 @@ class AnggotaController extends Controller
                     'anggota.umur',
                 )
                 ->rightJoin('anggota', 'anggota.anggota_user_id','=','users.user_id')
+                ->orderBy('users.created_at', 'DESC')
                 ->get();
             }
             return DataTables::of($data)

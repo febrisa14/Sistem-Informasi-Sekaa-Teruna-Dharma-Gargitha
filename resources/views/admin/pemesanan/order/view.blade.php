@@ -30,9 +30,6 @@
         <div class="block block-rounded">
             <div class="block-header border-bottom">
                 <h3 class="block-title"><small>List Data</small> Pemesan</h3>
-                <a href="" class="btn btn-sm btn-alt-primary px-2 py-2">
-                    <i class="fa fa-plus mr-1"></i> Tambah Pemesan
-                </a>
             </div>
             <div class="block-content block-content-full">
                 <!-- DataTables init on table by adding .js-dataTable-full-pagination class, functionality is initialized in js/pages/be_tables_datatables.min.js which was auto compiled from _js/pages/be_tables_datatables.js -->
@@ -136,6 +133,13 @@
 @stop
 @push('scripts')
 
+<!-- Script Success SweetAlert2 -->
+@if (Session::has('success'))
+<script>
+    Swal.fire('Success', '{{Session::get('success')}}' ,'success');
+</script>
+@endif
+
 <script>
 
 $(document).ready(function(){
@@ -164,72 +168,47 @@ $(document).ready(function(){
         });
     });
 
-    //Function untuk menampilkan modal ketika diklik tombol tambah
-    // $('#addKegiatan').click(function () {
-    //     $('#ModalKegiatan').modal({
-    //         show: true,
-    //         backdrop: 'static',
-    //         keyboard: false
-    //     });
-    // });
-
-    //Function untuk menambahkan data ke datatabase berelasi
-    // $('#saveBtn').click(function () {
-    //     $.ajax({
-    //         data: $('#KegiatanForm').serialize(),
-    //         url: "{{ route('admin.kegiatan.store') }}",
-    //         type: "POST",
-    //         dataType: 'json',
-    //         success: function (data) {
-    //             $('#KegiatanForm').trigger("reset");
-    //             $('#ModalKegiatan').modal('hide');
-    //             Swal.fire('Success', data.message ,'success');
-    //             var table = $('#table-kegiatan').DataTable();
-    //             table.draw();
-    //             // location.reload();
-    //         },
-    //         error: function(data) {
-    //             $.each(data.responseJSON.errors, function (key, value) {
-    //                 iziToast.error({
-    //                 title: 'Error',
-    //                 message: value,
-    //                 position: 'bottomRight',
-    //                 });
-    //             });
-    //         }
-    //     });
-    // });
-
-    // $(document).on('click', '.delete', function (){
-    //     var id = $(this).data("id");
-    //     Swal.fire({
-    //         title: 'Hapus Data Kegiatan?',
-    //         text: 'Klik "Iya" untuk menghapus data',
-    //         icon: 'warning',
-    //         showCancelButton: true,
-    //         confirmButtonColor: '#d33',
-    //         cancelButtonColor: '#3085d6',
-    //         confirmButtonText: 'Iya',
-    //         cancelButtonText: 'Tidak'
-    //     }).then((result) => {
-    //         if(result.isConfirmed){
-    //             $.ajax({
-    //                 type: "delete",
-    //                 dataType: 'json',
-    //                 url: "{{ route('admin.kegiatan.destroy','') }}/"+id,
-    //                 success: function (data) {
-    //                     if (data.success == true)
-    //                     {
-    //                         Swal.fire('Deleted', data.message ,'success');
-    //                     }
-    //                     var table = $('#table-kegiatan').DataTable();
-    //                     table.draw();
-    //                     // location.reload();
-    //                 }
-    //             });
-    //         }
-    //     });
-    // });
+    $(document).on('click', '.delete', function (){
+        var id = $(this).data("id");
+        Swal.fire({
+            title: 'Hapus Data Transaksi Pemesanan?',
+            text: 'Klik "Iya" untuk menghapus data',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#d33',
+            cancelButtonColor: '#3085d6',
+            confirmButtonText: 'Iya',
+            cancelButtonText: 'Tidak'
+        }).then((result) => {
+            if(result.isConfirmed){
+                $.ajax({
+                    type: "delete",
+                    dataType: 'json',
+                    url: "{{ route('admin.pemesan.destroy','') }}/"+id,
+                    success: function (data) {
+                        if (data.success == true)
+                        {
+                            Swal.fire('Deleted', data.message ,'success');
+                        }
+                        var table = $('#table-pemesan').DataTable();
+                        table.draw();
+                        // location.reload();
+                    },
+                    error: function (data) {
+                        if (data.responseJSON)
+                        {
+                            Swal.fire('Error', 'Gagal Hapus Data Transaksi Pemesanan', 'error')
+                        }
+                        var table = $('#table-pemesan').DataTable();
+                        table.draw();
+                    }
+                });
+            }
+            // else {
+            //     Swal.fire('Batal','Batal Menghapus Data Pengurus','error')
+            // }
+        });
+    });
 
 });
 </script>

@@ -31,9 +31,11 @@
         <div class="block block-rounded">
             <div class="block-header border-bottom">
                 <h3 class="block-title"><small>Informasi Data</small> Kegiatan</h3>
+                @if (Auth::user()->pengurus->jabatan->nama_jabatan == 'Ketua STT' || Auth::user()->pengurus->jabatan->nama_jabatan == 'Wakil Ketua STT' || Auth::user()->pengurus->jabatan->nama_jabatan == 'Sekretaris 1' || Auth::user()->pengurus->jabatan->nama_jabatan == 'Sekretaris 2')
                 <a href="{{route('admin.kegiatan.cetak', ['id' => $kegiatan->kegiatan_id])}}" id="addKegiatan" class="btn btn-sm btn-alt-primary px-2 py-2">
                     <i class="fa fa-print mr-1"></i> Cetak Kegiatan
                 </a>
+                @endIf
             </div>
             <div class="block-content block-content-full">
                 <div class="block-content font-size-sm">

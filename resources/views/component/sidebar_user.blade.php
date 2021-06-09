@@ -35,7 +35,7 @@
                     </a>
                 </li>
                 <li class="nav-main-heading">Pemesanan</li>
-                <li class="nav-main-item {{ Request::is('anggota/baju*') || Request::is('anggota/pesanan_saya') ? 'open' : '' }}">
+                <li class="nav-main-item {{ Request::is('anggota/baju*') || Request::is('anggota/pesanan_saya*') ? 'open' : '' }}">
                     <a class="nav-main-link nav-main-link-submenu" data-toggle="submenu" aria-haspopup="true" aria-expanded="false" href="#">
                         <i class="nav-main-link-icon fas fa-money-check-alt"></i>
                         <span class="nav-main-link-name">Baju</span>

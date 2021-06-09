@@ -30,9 +30,14 @@
         <div class="block block-rounded">
             <div class="block-header border-bottom">
                 <h3 class="block-title"><small>List Data</small> Jenis Kegiatan</h3>
+                @if (Auth::User()->pengurus->jabatan->nama_jabatan == 'Sekretaris 1' ||
+                Auth::User()->pengurus->jabatan->nama_jabatan == 'Sekretaris 2' ||
+                Auth::User()->pengurus->jabatan->nama_jabatan == 'Ketua STT' ||
+                Auth::User()->pengurus->jabatan->nama_jabatan == 'Wakil Ketua STT')
                 <a href="javascript:void(0)" id="addJenisKegiatan" class="btn btn-sm btn-alt-primary px-2 py-2">
-                    <i class="fa fa-plus mr-1"></i> Add Jenis Kegiatan
+                    <i class="fa fa-plus mr-1"></i> Tambah Jenis Kegiatan
                 </a>
+                @endIf
             </div>
             <div class="block-content block-content-full">
                 <!-- DataTables init on table by adding .js-dataTable-full-pagination class, functionality is initialized in js/pages/be_tables_datatables.min.js which was auto compiled from _js/pages/be_tables_datatables.js -->
@@ -57,7 +62,7 @@
                 <div class="modal-content">
                     <div class="block block-rounded block-themed block-transparent mb-0">
                         <div class="block-header bg-primary-dark">
-                            <h3 class="block-title">Add Jenis Kegiatan</h3>
+                            <h3 class="block-title">Tambah Jenis Kegiatan</h3>
                             <div class="block-options">
                                 <button type="button" class="btn-block-option" data-dismiss="modal" aria-label="Close">
                                     <i class="fa fa-fw fa-times"></i>

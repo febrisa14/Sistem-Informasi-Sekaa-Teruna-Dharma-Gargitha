@@ -17,7 +17,7 @@ class Kegiatan extends Model
     protected $primaryKey = 'kegiatan_id';
 
     protected $fillable = [
-        'nama_kegiatan', 'jenis_kegiatan_id', 'tgl_kegiatan', 'jam_kegiatan', 'lokasi', 'user_id', 'pakaian'
+        'nama_kegiatan', 'jenis_kegiatan_id', 'tgl_kegiatan', 'jam_kegiatan', 'lokasi', 'user_id', 'pakaian', 'pengurus_id'
     ];
 
     public function getCreatedAtAttribute($date)
@@ -25,10 +25,10 @@ class Kegiatan extends Model
         return Carbon::createFromFormat('Y-m-d H:i:s', $date)->format('d M Y');
     }
 
-    public function getTglKegiatanAttribute($date)
-    {
-        return Carbon::createFromFormat('d-m-Y', $date)->format('d M Y');
-    }
+    // public function getTglKegiatanAttribute($date)
+    // {
+    //     return Carbon::createFromFormat('d-m-Y', $date)->format('d M Y');
+    // }
 
     protected $dates = [
         'created_at' => 'datetime',

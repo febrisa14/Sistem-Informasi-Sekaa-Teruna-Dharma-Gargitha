@@ -30,9 +30,11 @@
         <div class="block block-rounded">
             <div class="block-header border-bottom">
                 <h3 class="block-title"><small>List Data</small> Baju</h3>
+                @if (Auth::user()->pengurus->jabatan->nama_jabatan == 'Ketua STT' || Auth::user()->pengurus->jabatan->nama_jabatan == 'Wakil Ketua STT' || Auth::user()->pengurus->jabatan->nama_jabatan == 'Bendahara 1' || Auth::user()->pengurus->jabatan->nama_jabatan == 'Bendahara 2')
                 <a href="{{route('admin.baju.create')}}" class="btn btn-sm btn-alt-primary px-2 py-2">
                     <i class="fa fa-plus mr-1"></i> Tambah Baju
                 </a>
+                @endIf
             </div>
             <div class="block-content block-content-full">
                 <!-- DataTables init on table by adding .js-dataTable-full-pagination class, functionality is initialized in js/pages/be_tables_datatables.min.js which was auto compiled from _js/pages/be_tables_datatables.js -->
@@ -133,6 +135,20 @@
 @stop
 @push('scripts')
 
+<!-- Script Success SweetAlert2 -->
+@if (Session::has('success'))
+<script>
+    Swal.fire('Success', '{{ Session::get('success') }}' ,'success');
+</script>
+@endif
+
+<!-- Script Error SweetAlert2 -->
+@if (Session::has('error'))
+<script>
+    Swal.fire('Error', '{{ Session::get('error') }}' ,'error');
+</script>
+@endif
+
 <script>
 
 $(document).ready(function(){
@@ -149,6 +165,9 @@ $(document).ready(function(){
             serverSide: true,
             autowidth: true,
             columnDefs: [
+                {targets: 0, className: "text-center", width: "70px"},
+                {targets: 1, className: "text-center", width: "280px"},
+                {targets: 2, className: "text-center", width: "120px"},
                 {targets: 3, className: "text-center", width: "247px"},
             ],
             ajax: '{{ route('admin.baju.index') }}',
@@ -197,36 +216,47 @@ $(document).ready(function(){
     //     });
     // });
 
-    // $(document).on('click', '.delete', function (){
-    //     var id = $(this).data("id");
-    //     Swal.fire({
-    //         title: 'Hapus Data Kegiatan?',
-    //         text: 'Klik "Iya" untuk menghapus data',
-    //         icon: 'warning',
-    //         showCancelButton: true,
-    //         confirmButtonColor: '#d33',
-    //         cancelButtonColor: '#3085d6',
-    //         confirmButtonText: 'Iya',
-    //         cancelButtonText: 'Tidak'
-    //     }).then((result) => {
-    //         if(result.isConfirmed){
-    //             $.ajax({
-    //                 type: "delete",
-    //                 dataType: 'json',
-    //                 url: "{{ route('admin.kegiatan.destroy','') }}/"+id,
-    //                 success: function (data) {
-    //                     if (data.success == true)
-    //                     {
-    //                         Swal.fire('Deleted', data.message ,'success');
-    //                     }
-    //                     var table = $('#table-kegiatan').DataTable();
-    //                     table.draw();
-    //                     // location.reload();
-    //                 }
-    //             });
-    //         }
-    //     });
-    // });
+    $(document).on('click', '.delete', function (){
+        var id = $(this).data("id");
+        Swal.fire({
+            title: 'Hapus Data Baju?',
+            text: 'Klik "Iya" untuk menghapus data',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#d33',
+            cancelButtonColor: '#3085d6',
+            confirmButtonText: 'Iya',
+            cancelButtonText: 'Tidak'
+        }).then((result) => {
+            if(result.isConfirmed){
+                $.ajax({
+                    type: "delete",
+                    dataType: 'json',
+                    url: "{{ route('admin.baju.destroy','') }}/"+id,
+                    success: function (data) {
+                        if (data.success == true)
+                        {
+                            Swal.fire('Deleted', data.message ,'success');
+                        }
+                        var table = $('#table-produk').DataTable();
+                        table.draw();
+                        // location.reload();
+                    },
+                    error: function (data) {
+                        if (data.responseJSON)
+                        {
+                            Swal.fire('Error', 'Gagal Hapus Data Baju', 'error')
+                        }
+                        var table = $('#table-pengeluaran').DataTable();
+                        table.draw();
+                    }
+                });
+            }
+            // else {
+            //     Swal.fire('Batal','Batal Menghapus Data Pengurus','error')
+            // }
+        });
+    });
 
 });
 </script>

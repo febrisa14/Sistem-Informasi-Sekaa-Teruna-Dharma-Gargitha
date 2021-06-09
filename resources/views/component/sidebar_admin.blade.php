@@ -58,11 +58,13 @@
                                 <span class="nav-main-link-name">List Kegiatan</span>
                             </a>
                         </li>
+                        @if (Auth::user()->pengurus->jabatan->nama_jabatan == 'Ketua STT' || Auth::user()->pengurus->jabatan->nama_jabatan == 'Wakil Ketua STT' || Auth::user()->pengurus->jabatan->nama_jabatan == 'Sekretaris 1' || Auth::user()->pengurus->jabatan->nama_jabatan == 'Sekretaris 2')
                         <li class="nav-main-item">
                             <a class="nav-main-link {{ Request::is('admin/jenis_kegiatan*') ? 'active' : '' }}" href="{{ route('admin.jenis_kegiatan.index') }}">
                                 <span class="nav-main-link-name">Jenis Kegiatan</span>
                             </a>
                         </li>
+                        @endIf
                     </ul>
                 </li>
                 {{-- <li class="nav-main-item">
@@ -104,12 +106,12 @@
                     <ul class="nav-main-submenu">
                         <li class="nav-main-item">
                             <a class="nav-main-link {{ Request::is('admin/baju*') ? 'active' : '' }}" href="{{ route('admin.baju.index') }}">
-                                <span class="nav-main-link-name">Baju</span>
+                                <span class="nav-main-link-name">List Baju</span>
                             </a>
                         </li>
                         <li class="nav-main-item">
                             <a class="nav-main-link {{ Request::is('admin/pemesan*') ? 'active' : '' }}" href="{{route('admin.pemesan.index')}}">
-                                <span class="nav-main-link-name">Pemesan</span>
+                                <span class="nav-main-link-name">List Pemesan</span>
                             </a>
                         </li>
                         @if (Auth::user()->pengurus->jabatan->nama_jabatan == 'Ketua STT' || Auth::user()->pengurus->jabatan->nama_jabatan == 'Wakil Ketua STT' || Auth::user()->pengurus->jabatan->nama_jabatan == 'Bendahara 1' || Auth::user()->pengurus->jabatan->nama_jabatan == 'Bendahara 2')

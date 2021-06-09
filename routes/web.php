@@ -27,7 +27,6 @@ Route::middleware(['auth'])->group(function () {
 
         Route::get('/', [App\Http\Controllers\User\DashboardController::class, '__invoke'])->name('dashboard');
 
-        Route::middleware(['verified'])->group(function () {
             Route::get('/anggota', [App\Http\Controllers\User\AnggotaController::class, 'index'])->name('anggota.index');
             Route::get('/anggota/{id}', [App\Http\Controllers\User\AnggotaController::class, 'show'])->name('anggota.show');
 
@@ -43,7 +42,9 @@ Route::middleware(['auth'])->group(function () {
             Route::post('order/{id}', [App\Http\Controllers\User\OrderController::class, 'prosesOrder'])->name('order');
 
             Route::get('/pesanan_saya', [App\Http\Controllers\User\OrderController::class, 'pesananSaya'])->name('pesanan');
-        });
+            Route::get('/pesanan_saya/{no_pesanan}/edit', [App\Http\Controllers\User\OrderController::class, 'editPesanan'])->name('pesanan.edit');
+            Route::put('/pesanan_saya/{no_pesanan}', [App\Http\Controllers\User\OrderController::class, 'update'])->name('pesanan.update');
+            Route::post('/pesanan_saya/{no_pesanan}', [App\Http\Controllers\User\OrderController::class, 'destroy'])->name('pesanan.destroy');
 
         //Route Profil User
         Route::get('/profile', [App\Http\Controllers\User\ProfileController::class, 'index'])->name('profile');
@@ -58,8 +59,8 @@ Route::middleware(['auth'])->group(function () {
 
         Route::get('/', [App\Http\Controllers\Admin\DashboardController::class, '__invoke'])->name('dashboard');
 
-        Route::middleware(['verified'])->group(function () {
             Route::resource('/pengurus', App\Http\Controllers\Admin\PengurusController::class);
+            Route::post('/pengurus/{penguru}', [App\Http\Controllers\Admin\PengurusController::class, 'transfer'])->name('pengurus.transfer');
             Route::resource('/anggota', App\Http\Controllers\Admin\AnggotaController::class);
             Route::resource('/jenis_kegiatan', JenisKegiatanController::class)->only(['store','index','destroy']);
             Route::resource('/baju', App\Http\Controllers\Admin\BajuController::class);
@@ -73,8 +74,6 @@ Route::middleware(['auth'])->group(function () {
 
             Route::resource('/kegiatan', App\Http\Controllers\Admin\KegiatanController::class);
             Route::get('/kegiatan/{id}/cetak', [App\Http\Controllers\Admin\KegiatanController::class, 'cetak'])->name('kegiatan.cetak');
-
-        });
 
         //Route Profile Admin
         Route::get('/profile', [App\Http\Controllers\Admin\ProfileController::class, 'index'])->name('profile');

@@ -89,11 +89,11 @@
                             <div class="form-group">
                                 <label for="email">Email</label>
                                 <input type="email" class="form-control" id="email" name="email" value="{{ $users->email }}">
-                                @if ($users->email_verified_at == '')
+                                {{-- @if ($users->email_verified_at == '')
                                     <small class="form-text text-danger"><i class="far fa-window-close mr-1"></i>Email Belum Diverifikasi</small>
                                 @else
                                 <small class="form-text text-success"><i class="fa fa-check mr-1"></i>Email Sudah Terverifikasi</small>
-                                @endif
+                                @endif --}}
                             </div>
                             <div class="form-group">
                                 <label for="no_telp">No. Telp</label>

@@ -135,8 +135,8 @@ $(document).ready(function(){
             columnDefs: [
                 {targets: 0, className: "text-center", width: "120px"},
                 {targets: 1, width: "90px"},
-                {targets: 2, className: "text-center", width: "236px"},
-                {targets: 3, className: "text-center", width: "82px"},
+                {targets: 2, className: "text-center", width: "210px"},
+                {targets: 3, className: "text-center", width: "108px"},
                 {targets: 4, className: "text-center", width: "222px"},
             ],
             ajax: '{{ route('admin.pengeluaran.index') }}',
@@ -144,7 +144,7 @@ $(document).ready(function(){
                 {data: 'no_transaksi_kas', name: 'no_transaksi_kas', orderable: false},
                 {data: 'tgl_transaksi', name: 'tgl_transaksi'},
                 {data: 'deskripsi', name: 'deskripsi',orderable: false},
-                {data: 'nominal', name: 'nominal', render: $.fn.dataTable.render.number('.')},
+                {data: 'nominal', name: 'nominal', render: $.fn.dataTable.render.number('.','','','Rp. ')},
                 {data: 'action', name: 'action', orderable: false, searchable: false},
             ]
         });
