@@ -25,7 +25,7 @@ class CreateOrdersTable extends Migration
             $table->timestamps();
 
             $table->foreign('anggota_id')->references('anggota_id')->on('anggota')->onDelete('cascade')->onUpdate('cascade');
-            $table->foreign('baju_id')->references('baju_id')->on('baju_ogoh_ogoh')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreign('baju_id')->references('baju_id')->on('baju')->onDelete('cascade')->onUpdate('cascade');
         });
     }
 
