@@ -16,7 +16,7 @@ class CreateOrdersTable extends Migration
         Schema::create('pemesanan', function (Blueprint $table) {
             $table->string('no_pesanan',30)->primary();
             $table->unsignedInteger('anggota_id');
-            $table->unsignedInteger('baju_id');
+            $table->string('baju_id',20);
             $table->string('size',10);
             $table->string('tgl_pesanan',20);
             $table->string('tgl_bayar',20);
