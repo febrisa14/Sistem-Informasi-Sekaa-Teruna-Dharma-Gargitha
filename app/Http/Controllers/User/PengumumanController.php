@@ -39,7 +39,7 @@ class PengumumanController extends Controller
     public function show($id)
     {
         $pengumumans = Kegiatan::select(
-            'kegiatan_id', 'pakaian', 'users.name' ,'kegiatan.created_at' ,'nama_kegiatan', 'nama_jenis_kegiatan', 'tgl_kegiatan', 'jam_kegiatan', 'lokasi', 'kegiatan.jenis_kegiatan_id'
+            'kegiatan_id', 'lampiran', 'pakaian', 'users.name' ,'kegiatan.created_at' ,'nama_kegiatan', 'nama_jenis_kegiatan', 'tgl_kegiatan', 'jam_kegiatan', 'lokasi', 'kegiatan.jenis_kegiatan_id'
         )
         ->leftjoin('jenis_kegiatan', 'jenis_kegiatan.jenis_kegiatan_id','=','kegiatan.jenis_kegiatan_id')
         ->leftJoin('pengurus', 'pengurus.pengurus_id', '=', 'kegiatan.pengurus_id')

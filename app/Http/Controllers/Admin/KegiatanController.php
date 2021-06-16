@@ -11,6 +11,7 @@ use Auth;
 use PDF;
 use App\Models\User;
 use Carbon\Carbon;
+use File;
 
 class KegiatanController extends Controller
 {
@@ -55,10 +56,17 @@ class KegiatanController extends Controller
             ->rawColumns(['action'])->make(true);
         }
 
+        return view('admin/kegiatan/kegiatan/kegiatan',[
+            'title' => 'Data Kegiatan | Sistem Informasi Sekaa Teruna Dharma Gargitha'
+        ]);
+    }
+
+    public function create()
+    {
         $jeniskegiatans = JenisKegiatan::all();
 
-        return view('admin/kegiatan/kegiatan/kegiatan',[
-            'title' => 'Data Kegiatan | Sistem Informasi Sekaa Teruna Dharma Gargitha',
+        return view('admin/kegiatan/kegiatan/kegiatan_add',[
+            'title' => 'Tambah Data Kegiatan | Sistem Informasi Sekaa Teruna Dharma Gargitha',
             'jeniskegiatans' => $jeniskegiatans
         ]);
     }
@@ -71,26 +79,51 @@ class KegiatanController extends Controller
             'jenis_kegiatan_id' => 'required',
             'jam_kegiatan' => 'required',
             'lokasi' => 'required',
-            'pakaian' => 'required'
+            'pakaian' => 'required',
+            'lampiran' => 'mimes:pdf|max:2048|nullable'
         ]);
 
-        Kegiatan::create([
-            'nama_kegiatan' => $request->nama_kegiatan,
-            'tgl_kegiatan' => $request->tgl_kegiatan,
-            'jenis_kegiatan_id' => $request->jenis_kegiatan_id,
-            'jam_kegiatan' => $request->jam_kegiatan,
-            'lokasi' => $request->lokasi,
-            'pakaian' => $request->pakaian,
-            'pengurus_id' => Auth::user()->pengurus->pengurus_id
-        ]);
+        if ($request->has('lampiran'))
+        {
+            $lampiran = $request->file('lampiran');
+            $filename = time() . '_' . $lampiran->getClientOriginalName();
+            $lampiran->move(public_path('doc'),$filename);
 
-        return response()->json(['success' => true, 'message' => 'Berhasil Menambahkan Kegiatan.']);
+            Kegiatan::create([
+                'nama_kegiatan' => $request->nama_kegiatan,
+                'tgl_kegiatan' => $request->tgl_kegiatan,
+                'jenis_kegiatan_id' => $request->jenis_kegiatan_id,
+                'jam_kegiatan' => $request->jam_kegiatan,
+                'lokasi' => $request->lokasi,
+                'pakaian' => $request->pakaian,
+                'lampiran' => $filename,
+                'pengurus_id' => Auth::user()->pengurus->pengurus_id
+            ]);
+
+            return redirect()->route('admin.kegiatan.index')->with('success', 'Berhasil Tambah Kegiatan.');
+        }
+
+        else {
+            Kegiatan::create([
+                'nama_kegiatan' => $request->nama_kegiatan,
+                'tgl_kegiatan' => $request->tgl_kegiatan,
+                'jenis_kegiatan_id' => $request->jenis_kegiatan_id,
+                'jam_kegiatan' => $request->jam_kegiatan,
+                'lokasi' => $request->lokasi,
+                'pakaian' => $request->pakaian,
+                'pengurus_id' => Auth::user()->pengurus->pengurus_id
+            ]);
+
+            return redirect()->route('admin.kegiatan.index')->with('success', 'Berhasil Tambah Kegiatan.');
+        }
+
+        // return response()->json(['success' => true, 'message' => 'Berhasil Menambahkan Kegiatan.']);
     }
 
     public function show($id)
     {
-        $pengumumans = Kegiatan::select(
-            'kegiatan_id', 'pakaian', 'users.name' ,'kegiatan.created_at' ,'nama_kegiatan', 'nama_jenis_kegiatan', 'tgl_kegiatan', 'jam_kegiatan', 'lokasi', 'kegiatan.jenis_kegiatan_id'
+        $kegiatan = Kegiatan::select(
+            'kegiatan_id', 'lampiran' , 'pakaian', 'users.name' ,'kegiatan.created_at' ,'nama_kegiatan', 'nama_jenis_kegiatan', 'tgl_kegiatan', 'jam_kegiatan', 'lokasi', 'kegiatan.jenis_kegiatan_id'
         )
         ->leftjoin('jenis_kegiatan', 'jenis_kegiatan.jenis_kegiatan_id','=','kegiatan.jenis_kegiatan_id')
         ->leftJoin('pengurus', 'pengurus.pengurus_id', '=', 'kegiatan.pengurus_id')
@@ -100,21 +133,24 @@ class KegiatanController extends Controller
 
         return view('admin/kegiatan/kegiatan/kegiatan_show', [
             'title' => 'Detail Kegiatan | Sistem Informasi ST. Dharma Gargitha',
-            'kegiatans' => $pengumumans
+            'kegiatans' => $kegiatan
         ]);
     }
 
     public function edit($id)
     {
         $kegiatan = Kegiatan::select(
-            'kegiatan_id', 'pakaian' ,'kegiatan.created_at' ,'nama_kegiatan', 'nama_jenis_kegiatan', 'tgl_kegiatan', 'jam_kegiatan', 'lokasi', 'kegiatan.jenis_kegiatan_id'
+            'kegiatan_id', 'lampiran', 'pakaian' ,'kegiatan.created_at' ,'nama_kegiatan', 'nama_jenis_kegiatan', 'tgl_kegiatan', 'jam_kegiatan', 'lokasi', 'kegiatan.jenis_kegiatan_id'
         )
         ->leftjoin('jenis_kegiatan', 'jenis_kegiatan.jenis_kegiatan_id','=','kegiatan.jenis_kegiatan_id')
         ->where('kegiatan_id', $id)->first();
 
+        $jeniskegiatans = JenisKegiatan::all();
+
         return view('admin/kegiatan/kegiatan/kegiatan_edit', [
             'title' => 'Edit Data Kegiatan | Sistem Informasi Sekaa Teruna Dharma Gargitha',
-            'kegiatan' => $kegiatan
+            'kegiatan' => $kegiatan,
+            'jeniskegiatans' => $jeniskegiatans
         ]);
     }
 
@@ -125,17 +161,27 @@ class KegiatanController extends Controller
             'tgl_kegiatan' => 'required',
             'jam_kegiatan' => 'required',
             'lokasi' => 'required',
-            'pakaian' => 'required'
+            'pakaian' => 'required',
+            'lampiran' => 'mimes:pdf|max:2048|nullable'
         ]);
 
         $kegiatan = Kegiatan::where('kegiatan_id',$id)
-                    ->select('nama_kegiatan','tgl_kegiatan','jam_kegiatan','lokasi','pakaian')
+                    ->select('nama_kegiatan','lampiran','tgl_kegiatan','jam_kegiatan','lokasi','pakaian')
                     ->first();
+
+        if ($request->has('lampiran'))
+        {
+            File::delete('doc/'.$kegiatan->lampiran);
+            $lampiran = $request->file('lampiran');
+            $filename = time() . '_' . $lampiran->getClientOriginalName();
+            $lampiran->move(public_path('doc'),$filename);
+        }
 
         $kegiatan->nama_kegiatan = $request->nama_kegiatan;
         $kegiatan->tgl_kegiatan = $request->tgl_kegiatan;
         $kegiatan->jam_kegiatan = $request->jam_kegiatan;
         $kegiatan->lokasi = $request->lokasi;
+        $kegiatan->lampiran = $request->hasFile('lampiran') ? $filename : $kegiatan->lampiran;
         $kegiatan->pakaian = $request->pakaian;
 
         if ($kegiatan->isDirty())
@@ -146,6 +192,7 @@ class KegiatanController extends Controller
                 'jam_kegiatan' => $request->jam_kegiatan,
                 'lokasi' => $request->lokasi,
                 'pakaian' => $request->pakaian,
+                'lampiran' => $filename,
                 'updated_at' => now()
             ]);
 

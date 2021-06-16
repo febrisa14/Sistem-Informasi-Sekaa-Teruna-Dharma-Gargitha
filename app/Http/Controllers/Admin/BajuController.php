@@ -79,7 +79,7 @@ class BajuController extends Controller
         $request->validate([
             'nama_baju' => 'required',
             'foto_baju' => 'required|image|mimes:jpeg,png,jpg|max:4096',
-            'harga' => 'required',
+            'harga' => 'required|numeric',
             'tgl_batas_order' => 'required',
             'deskripsi' => 'required'
         ]);
@@ -150,7 +150,7 @@ class BajuController extends Controller
     {
         $request->validate([
             'nama_baju' => 'required',
-            'harga' => 'required',
+            'harga' => 'required|numeric',
             'tgl_batas_order' => 'required',
             'deskripsi' => 'required'
         ]);

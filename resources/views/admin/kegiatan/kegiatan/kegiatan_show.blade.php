@@ -65,6 +65,15 @@
                             <td>:</td>
                             <td><span>{{$kegiatan->lokasi}}</span></td>
                         </tr>
+                        <tr>
+                            <td><b>Lampiran</b></td>
+                            <td>:</td>
+                            @if ($kegiatan->lampiran != null)
+                                <td><span><a href="{{ asset('/doc/'.$kegiatan->lampiran) }}">{{$kegiatan->lampiran}}</a></span></td>
+                            @else
+                                <td><span style="color: rgb(179, 23, 23);">-- Kosong --</span></td>
+                            @endif
+                        </tr>
                     </table>
                     <table class="table table-borderless">
                         <tr class="bg-primary text-white">

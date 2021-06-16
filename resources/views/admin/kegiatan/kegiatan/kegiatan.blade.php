@@ -34,7 +34,7 @@
                 Auth::User()->pengurus->jabatan->nama_jabatan == 'Sekretaris 2' ||
                 Auth::User()->pengurus->jabatan->nama_jabatan == 'Ketua STT' ||
                 Auth::User()->pengurus->jabatan->nama_jabatan == 'Wakil Ketua STT')
-                <a href="javascript:void(0)" id="addKegiatan" class="btn btn-sm btn-alt-primary px-2 py-2">
+                <a href="{{route('admin.kegiatan.create')}}" id="addKegiatan" class="btn btn-sm btn-alt-primary px-2 py-2">
                     <i class="fa fa-plus mr-1"></i> Tambah Kegiatan
                 </a>
                 @endif
@@ -57,85 +57,6 @@
             </div>
         </div>
         <!-- END Dynamic Table Full Pagination -->
-        <!-- Modal Page Add Pengurus -->
-        <div class="modal fade" id="ModalKegiatan" role="dialog" data-backdrop="static" data-keyboard="false" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-popin modal-dialog-center" role="document">
-                <div class="modal-content">
-                    <div class="block block-rounded block-themed block-transparent mb-0">
-                        <div class="block-header bg-primary">
-                            <h3 class="block-title">Tambah Kegiatan</h3>
-                            <div class="block-options">
-                                <button type="button" class="btn-block-option" data-dismiss="modal" aria-label="Close">
-                                    <i class="fa fa-fw fa-times"></i>
-                                </button>
-                            </div>
-                        </div>
-                        <div class="block-content font-size-sm">
-                            <form id="KegiatanForm" name="KegiatanForm">
-                                @csrf
-                                <input type="hidden" name="kegiatan_id" id="kegiatan_id">
-                                <input type="hidden" name="pengurus_id" id="pengurus_id">
-                                <div class="row">
-                                    <div class="col-12">
-                                        <div class="form-group">
-                                            <label>Nama Kegiatan</label>
-                                            <input type="text" class="form-control" id="nama_kegiatan" name="nama_kegiatan" placeholder="Masukan Nama Kegiatan....">
-                                            {{-- <small class="form-text text-muted">Contoh: contoh@gmail.com</small> --}}
-                                        </div>
-                                    </div>
-                                    <div class="col-6">
-                                        <div class="form-group">
-                                            <label>Tanggal Kegiatan</label>
-                                            <input type="text" class="js-flatpickr form-control bg-white" id="tgl_kegiatan" name="tgl_kegiatan" placeholder="Contoh: 09-04-2021" data-date-format="d-m-Y" data-id=minDateToday>
-                                        </div>
-                                    </div>
-                                    <div class="col-6">
-                                        <div class="form-group">
-                                            <label>Jenis Kegiatan</label>
-                                            <select class="custom-select" id="jenis_kegiatan_id" name="jenis_kegiatan_id">
-                                                <option value="">- Pilih -</option>
-                                                @forelse ($jeniskegiatans as $jeniskegiatan)
-                                                    <option value="{{ $jeniskegiatan->jenis_kegiatan_id }}">{{ $jeniskegiatan->nama_jenis_kegiatan }}</option>
-                                                @empty
-                                                    <option value="">-- Kosong --</option>
-                                                @endforelse
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div class="col-6">
-                                        <div class="form-group">
-                                            <label>Jam Kegiatan</label>
-                                            <input type="text" class="js-flatpickr form-control bg-white" id="jam_kegiatan" name="jam_kegiatan" data-enable-time="true" data-no-calendar="true" data-date-format="H:i" data-time_24hr="true" placeholder="Contoh: 19:00">
-                                        </div>
-                                    </div>
-                                    <div class="col-6">
-                                        <div class="form-group">
-                                            <label>Pakaian</label>
-                                            <input type="text" class="form-control" name="pakaian" placeholder="Masukan Pakaian....">
-                                        </div>
-                                    </div>
-                                    <div class="col-12">
-                                        <div class="form-group">
-                                            <label>Lokasi Kegiatan</label>
-                                            <input type="text" class="form-control" id="lokasi" name="lokasi" placeholder="Masukan Lokasi Kegiatan....">
-                                        </div>
-                                    </div>
-                                </div>
-                            </form>
-                        </div>
-                        {{-- <div class="block-content block-content-full text-right border-top">
-                            <button id="" type="submit" class="btn btn-alt-primary"><i class="fa fa-save"></i> Simpan</button>
-                        </div> --}}
-                        <div class="block-content block-content-full col-md-12">
-                            <button id="saveBtn" type="submit" data-toggle="click-ripple" class="btn btn-block btn-outline-primary">
-                                <i class="fa fa-save"></i> Simpan
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- END Modal Add Pengurus -->
     </div>
     <!-- END Page Content -->
 </main>
@@ -199,40 +120,40 @@ $(document).ready(function(){
     });
 
     //Function untuk menampilkan modal ketika diklik tombol tambah
-    $('#addKegiatan').click(function () {
-        $('#ModalKegiatan').modal({
-            show: true,
-            backdrop: 'static',
-            keyboard: false
-        });
-    });
+    // $('#addKegiatan').click(function () {
+    //     $('#ModalKegiatan').modal({
+    //         show: true,
+    //         backdrop: 'static',
+    //         keyboard: false
+    //     });
+    // });
 
-    //Function untuk menambahkan data ke datatabase berelasi
-    $('#saveBtn').click(function () {
-        $.ajax({
-            data: $('#KegiatanForm').serialize(),
-            url: "{{ route('admin.kegiatan.store') }}",
-            type: "POST",
-            dataType: 'json',
-            success: function (data) {
-                $('#KegiatanForm').trigger("reset");
-                $('#ModalKegiatan').modal('hide');
-                Swal.fire('Success', data.message ,'success');
-                var table = $('#table-kegiatan').DataTable();
-                table.draw();
-                // location.reload();
-            },
-            error: function(data) {
-                $.each(data.responseJSON.errors, function (key, value) {
-                    iziToast.error({
-                    title: 'Error',
-                    message: value,
-                    position: 'bottomRight',
-                    });
-                });
-            }
-        });
-    });
+    // //Function untuk menambahkan data ke datatabase berelasi
+    // $('#saveBtn').click(function () {
+    //     $.ajax({
+    //         data: $('#KegiatanForm').serialize(),
+    //         url: "{{ route('admin.kegiatan.store') }}",
+    //         type: "POST",
+    //         dataType: 'json',
+    //         success: function (data) {
+    //             $('#KegiatanForm').trigger("reset");
+    //             $('#ModalKegiatan').modal('hide');
+    //             Swal.fire('Success', data.message ,'success');
+    //             var table = $('#table-kegiatan').DataTable();
+    //             table.draw();
+    //             // location.reload();
+    //         },
+    //         error: function(data) {
+    //             $.each(data.responseJSON.errors, function (key, value) {
+    //                 iziToast.error({
+    //                 title: 'Error',
+    //                 message: value,
+    //                 position: 'bottomRight',
+    //                 });
+    //             });
+    //         }
+    //     });
+    // });
 
     $(document).on('click', '.delete', function (){
         var id = $(this).data("id");

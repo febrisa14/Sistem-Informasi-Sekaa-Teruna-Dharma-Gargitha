@@ -17,7 +17,7 @@ class Kegiatan extends Model
     protected $primaryKey = 'kegiatan_id';
 
     protected $fillable = [
-        'nama_kegiatan', 'jenis_kegiatan_id', 'tgl_kegiatan', 'jam_kegiatan', 'lokasi', 'user_id', 'pakaian', 'pengurus_id'
+        'nama_kegiatan', 'jenis_kegiatan_id', 'tgl_kegiatan', 'jam_kegiatan', 'lokasi', 'user_id', 'pakaian', 'pengurus_id', 'lampiran'
     ];
 
     public function getCreatedAtAttribute($date)

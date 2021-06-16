@@ -27,11 +27,18 @@ class AnggotaRequest extends FormRequest
             'email' => 'required|email|unique:users',
             'password' => 'required|min:8',
             'name' => 'required',
-            'no_telp' => 'required',
+            'no_telp' => 'required|numeric',
             'tgl_lahir' => 'required',
             'jenis_kelamin' => 'required',
             'tempekan' => 'required',
             'alamat' => 'required'
+        ];
+    }
+
+    public function messages()
+    {
+        return [
+            'no_telp.numeric' => 'no. telp harus angka'
         ];
     }
 }

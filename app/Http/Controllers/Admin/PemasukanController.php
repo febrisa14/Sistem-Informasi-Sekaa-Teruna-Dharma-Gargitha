@@ -63,14 +63,14 @@ class PemasukanController extends Controller
     {
         $request->validate([
             'tgl_transaksi' => 'required',
-            'nominal' => 'required',
+            'nominal' => 'required|numeric',
             'deskripsi' => 'required'
         ]);
 
         $pengurusId = Auth::user()->pengurus->pengurus_id;
 
         Kas::create([
-            'no_transaksi_kas' => 'TX'.time(),
+            'no_transaksi_kas' => 'IN'.time(),
             'pengurus_id' => $pengurusId,
             'type' => 'Pemasukan',
             'tgl_transaksi' => $request->tgl_transaksi,

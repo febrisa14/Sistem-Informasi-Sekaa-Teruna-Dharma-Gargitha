@@ -42,7 +42,7 @@
                             </div>
                             <div class="form-group">
                                 <label>Deskripsi Baju</label>
-                                <textarea class="form-control" name="deskripsi" rows="4">{{$baju->deskripsi}}</textarea>
+                                <textarea class="form-control bg-white" name="deskripsi" rows="4" readonly>{{$baju->deskripsi}}</textarea>
                             </div>
                             <div class="form-group">
                                 <label for="nama">Harga : </label>

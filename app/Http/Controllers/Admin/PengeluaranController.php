@@ -61,14 +61,14 @@ class PengeluaranController extends Controller
     {
         $request->validate([
             'tgl_transaksi' => 'required',
-            'nominal' => 'required',
+            'nominal' => 'required|numeric',
             'deskripsi' => 'required'
         ]);
 
         $pengurusId = Auth::user()->pengurus->pengurus_id;
 
         Kas::create([
-            'no_transaksi_kas' => 'TX'.time(),
+            'no_transaksi_kas' => 'OUT'.time(),
             'pengurus_id' => $pengurusId,
             'type' => 'Pengeluaran',
             'tgl_transaksi' => $request->tgl_transaksi,

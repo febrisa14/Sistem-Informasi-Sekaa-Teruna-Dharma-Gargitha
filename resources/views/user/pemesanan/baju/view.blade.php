@@ -81,6 +81,7 @@
     </main>
     <!-- END Main Container -->
 @endsection
+
 @push('scripts')
 
 <!-- Script Error SweetAlert2 -->
@@ -88,6 +89,19 @@
 <script>
     Swal.fire('Error', '{{ Session::get('error') }}' ,'error');
 </script>
+@endif
+
+<!-- iziToast Error Tampil -->
+@if ($errors->any)
+    @foreach ($errors->all() as $message)
+    <script>
+        iziToast.error({
+            title: 'Error',
+            message: '{{ $message }}',
+            position: 'bottomRight',
+        });
+    </script>
+    @endforeach
 @endif
 
 @endpush

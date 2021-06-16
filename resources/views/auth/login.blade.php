@@ -92,7 +92,7 @@ iziToast.warning({
     @foreach ($errors->all() as $message)
     <script>
         iziToast.error({
-            title: 'Error',
+            title: 'Login Gagal',
             message: '{{ $message }}',
             position: 'bottomRight',
         });
@@ -105,5 +105,18 @@ iziToast.warning({
         $('.alert-success').alert('close');
     }, 3000);
 </script>
+
+@if ($message = Session::get('failed'))
+<script>
+iziToast.warning({
+    title: 'Login Gagal',
+    message: '{{$message}}',
+    position: 'bottomRight'
+});
+</script>
+
+@endif
+
 @endsection
+
 

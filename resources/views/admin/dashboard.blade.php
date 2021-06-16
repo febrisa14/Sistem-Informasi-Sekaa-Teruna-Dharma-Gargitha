@@ -141,7 +141,7 @@
             <div class="block block-rounded d-flex flex-column">
                 <div class="block-content block-content-full flex-grow-1 d-flex justify-content-between align-items-center">
                     <dl class="mb-0">
-                        <dt class="font-size-h2 font-w700">Rp. {{number_format($pemasukan[0]->total)}}</dt>
+                        <dt class="font-size-h2 font-w700">Rp. {{number_format($pemasukan)}}</dt>
                         <dd class="text-muted mb-0">Total Saldo Pemasukan</dd>
                     </dl>
                     <div class="item item-rounded bg-body">
@@ -156,7 +156,7 @@
             <div class="block block-rounded d-flex flex-column">
                 <div class="block-content block-content-full flex-grow-1 d-flex justify-content-between align-items-center">
                     <dl class="mb-0">
-                        <dt class="font-size-h2 font-w700">Rp. {{number_format($pengeluaran[0]->total)}}</dt>
+                        <dt class="font-size-h2 font-w700">Rp. {{number_format($pengeluaran)}}</dt>
                         <dd class="text-muted mb-0">Total Saldo Pengeluaran</dd>
                     </dl>
                     <div class="item item-rounded bg-body">
