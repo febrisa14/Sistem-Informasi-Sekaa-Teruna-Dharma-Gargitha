@@ -12,6 +12,8 @@ use Hash;
 use Carbon\Carbon;
 use App\Http\Requests\AnggotaRequest;
 use App\Http\Requests\UpdateAnggotaRequest;
+use Maatwebsite\Excel\Facades\Excel;
+use App\Exports\AnggotaExport;
 
 class AnggotaController extends Controller
 {
@@ -191,5 +193,11 @@ class AnggotaController extends Controller
             'success' => true,
             'message' => 'Berhasil Menghapus Data Anggota'
         ]);
+    }
+
+    public function export()
+    {
+        // dd(User::getAnggota());
+        return Excel::download(new AnggotaExport, 'anggota.xlsx');
     }
 }

@@ -25,6 +25,9 @@ class PemasukanController extends Controller
             ->where('type','=','Pemasukan')
             ->get();
             return DataTables::of($data)
+            ->editColumn('tgl_transaksi', function($data){
+                return Carbon::createFromFormat('Y-m-d', $data->tgl_transaksi)->format('d M Y');
+            })
             ->addIndexColumn()
             ->addColumn('action', function($data){
                 if (Auth::User()->pengurus->jabatan->nama_jabatan == 'Sekretaris 1' ||

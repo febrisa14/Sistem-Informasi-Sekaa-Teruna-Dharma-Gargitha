@@ -34,6 +34,9 @@
                 Auth::User()->pengurus->jabatan->nama_jabatan == 'Sekretaris 2' ||
                 Auth::User()->pengurus->jabatan->nama_jabatan == 'Ketua STT' ||
                 Auth::User()->pengurus->jabatan->nama_jabatan == 'Wakil Ketua STT')
+                    <a href="{{ route('admin.anggota.export') }}" id="addAnggota" class="btn btn-sm btn-alt-success px-2 py-2 mr-2">
+                        <i class="fa fa-print mr-1"></i> Export Anggota
+                    </a>
                     <a href="{{ route('admin.anggota.create') }}" id="addAnggota" class="btn btn-sm btn-alt-primary px-2 py-2">
                         <i class="fa fa-plus mr-1"></i> Tambah Anggota
                     </a>

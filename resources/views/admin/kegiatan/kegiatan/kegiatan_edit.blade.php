@@ -78,7 +78,7 @@
                                     <!-- Populating custom file input label with the selected filename (data-toggle="custom-file-input" is initialized in Helpers.coreBootstrapCustomFileInput()) -->
                                     <input type="file" class="custom-file-input" data-toggle="custom-file-input" name="lampiran">
                                     <label class="custom-file-label" for="one-profile-edit-avatar">ubah lampiran disini...</label>
-                                    <small class="form-text text-muted">Note: Format file .pdf, maks. 2046 MB</small>
+                                    <small class="form-text text-muted">Note: Format file .pdf, maks. 2 MB</small>
                                 </div>
                             </div>
                         </div>

@@ -62,6 +62,7 @@ Route::middleware(['auth'])->group(function () {
             Route::resource('/pengurus', App\Http\Controllers\Admin\PengurusController::class);
             Route::post('/pengurus/{penguru}', [App\Http\Controllers\Admin\PengurusController::class, 'transfer'])->name('pengurus.transfer');
             Route::resource('/anggota', App\Http\Controllers\Admin\AnggotaController::class);
+            Route::get('/anggota/exports', [App\Http\Controllers\Admin\AnggotaController::class, 'export'])->name('anggota.export');
             Route::resource('/jenis_kegiatan', JenisKegiatanController::class)->only(['store','index','destroy']);
             Route::resource('/baju', App\Http\Controllers\Admin\BajuController::class);
             Route::resource('/pemesan', App\Http\Controllers\Admin\OrderController::class);

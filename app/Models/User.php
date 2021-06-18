@@ -9,6 +9,7 @@ use Illuminate\Notifications\Notifiable;
 use App\Models\Anggota;
 use App\Models\Pengurus;
 use App\Models\Kegiatan;
+use DB;
 
 class User extends Authenticatable implements MustVerifyEmail
 {
@@ -19,6 +20,15 @@ class User extends Authenticatable implements MustVerifyEmail
     // public $timestamps = false;
 
     protected $primaryKey = 'user_id';
+
+    public function getAnggota()
+    {
+        $data = DB::table('users')
+        // ->rightJoin('anggota', 'anggota.anggota_user_id', '=', 'users.user_id')
+        ->get();
+
+        return $data;
+    }
 
     public function Anggota()
     {
