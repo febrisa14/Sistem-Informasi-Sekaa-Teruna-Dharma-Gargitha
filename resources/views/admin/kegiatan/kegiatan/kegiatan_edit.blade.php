@@ -80,6 +80,11 @@
                                     <label class="custom-file-label" for="one-profile-edit-avatar">ubah lampiran disini...</label>
                                     <small class="form-text text-muted">Note: Format file .pdf, maks. 2 MB</small>
                                 </div>
+                                @if ($kegiatan->lampiran != null)
+                                <a href="{{ route('admin.kegiatan.deletelampiran',$kegiatan->kegiatan_id) }}" data-toggle="click-ripple" class="btn-sm btn-danger">
+                                    <i class="fa fa-trash mr-1"></i> Hapus Lampiran
+                                </a>
+                                @endIf
                             </div>
                         </div>
                     </div>

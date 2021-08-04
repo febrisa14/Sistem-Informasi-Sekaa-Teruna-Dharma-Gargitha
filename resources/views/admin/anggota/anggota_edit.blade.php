@@ -68,7 +68,7 @@
                         <div class="col-lg-6 col-xl-6">
                             <div class="form-group">
                                 <label for="tgl_lahir">Tanggal Lahir</label>
-                                <input type="text" class="js-flatpickr form-control bg-white" id="tgl_lahir" name="tgl_lahir" placeholder="d-m-Y" data-date-format="d-m-Y" value="{{ $user->tgl_lahir }}">
+                                <input type="text" class="js-flatpickr form-control bg-white" id="tgl_lahir" name="tgl_lahir" placeholder="Y-m-d" data-date-format="Y-m-d" value="{{ $user->tgl_lahir }}">
                             </div>
                             <div class="form-group">
                                 <label for="jenis_kelamin">Jenis Kelamin</label>

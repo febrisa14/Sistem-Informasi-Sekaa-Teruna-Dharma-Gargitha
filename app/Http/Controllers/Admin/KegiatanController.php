@@ -186,20 +186,62 @@ class KegiatanController extends Controller
 
         if ($kegiatan->isDirty())
         {
-            Kegiatan::where('kegiatan_id',$id)->update([
-                'nama_kegiatan' => $request->nama_kegiatan,
-                'tgl_kegiatan' => $request->tgl_kegiatan,
-                'jam_kegiatan' => $request->jam_kegiatan,
-                'lokasi' => $request->lokasi,
-                'pakaian' => $request->pakaian,
-                'lampiran' => $filename,
-                'updated_at' => now()
-            ]);
+            if ($request->has('lampiran'))
+            {
+                Kegiatan::where('kegiatan_id',$id)->update([
+                    'nama_kegiatan' => $request->nama_kegiatan,
+                    'tgl_kegiatan' => $request->tgl_kegiatan,
+                    'jam_kegiatan' => $request->jam_kegiatan,
+                    'lokasi' => $request->lokasi,
+                    'pakaian' => $request->pakaian,
+                    'lampiran' => $filename,
+                    'updated_at' => now()
+                ]);
+            }
+
+            if ($kegiatan->lampiran == null) {
+                Kegiatan::where('kegiatan_id',$id)->update([
+                    'nama_kegiatan' => $request->nama_kegiatan,
+                    'tgl_kegiatan' => $request->tgl_kegiatan,
+                    'jam_kegiatan' => $request->jam_kegiatan,
+                    'lokasi' => $request->lokasi,
+                    'pakaian' => $request->pakaian,
+                    'lampiran' => null,
+                    'updated_at' => now()
+                ]);
+            }
+
+            else {
+                Kegiatan::where('kegiatan_id',$id)->update([
+                    'nama_kegiatan' => $request->nama_kegiatan,
+                    'tgl_kegiatan' => $request->tgl_kegiatan,
+                    'jam_kegiatan' => $request->jam_kegiatan,
+                    'lokasi' => $request->lokasi,
+                    'pakaian' => $request->pakaian,
+                    'lampiran' => $kegiatan->lampiran,
+                    'updated_at' => now()
+                ]);
+            }
 
             return redirect()->route('admin.kegiatan.index')->with('success', 'Berhasil Update Kegiatan.');
         }
 
         return back()->with('error', 'Kamu belum merubah data apapun !');
+    }
+
+    public function deleteLampiran($id)
+    {
+        $kegiatan = Kegiatan::where('kegiatan_id',$id)
+                    ->select('lampiran')
+                    ->first();
+
+        File::delete('doc/'.$kegiatan->lampiran);
+
+        Kegiatan::where('kegiatan_id',$id)->update([
+            'lampiran' => null,
+        ]);
+
+        return redirect()->back()->with('success', 'Berhasil Delete Lampiran Kegiatan.');
     }
 
     public function cetak($id)

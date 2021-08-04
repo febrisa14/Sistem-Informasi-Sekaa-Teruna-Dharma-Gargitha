@@ -21,10 +21,20 @@ class User extends Authenticatable implements MustVerifyEmail
 
     protected $primaryKey = 'user_id';
 
-    public function getAnggota()
+    public static function getAnggota()
     {
-        $data = DB::table('users')
-        // ->rightJoin('anggota', 'anggota.anggota_user_id', '=', 'users.user_id')
+        $data = DB::table('users')->select
+        (
+            'users.name',
+            'users.email',
+            'users.no_telp',
+            'anggota.alamat',
+            'anggota.tgl_lahir',
+            'anggota.jenis_kelamin',
+            'anggota.umur',
+            'anggota.tempekan'
+        )
+        ->rightJoin('anggota', 'anggota.anggota_user_id', '=', 'users.user_id')
         ->get();
 
         return $data;

@@ -198,6 +198,6 @@ class AnggotaController extends Controller
     public function export()
     {
         // dd(User::getAnggota());
-        return Excel::download(new AnggotaExport, 'anggota.xlsx');
+        return Excel::download(new AnggotaExport, 'anggota_'.now().'.xlsx');
     }
 }

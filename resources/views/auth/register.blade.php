@@ -61,7 +61,7 @@
                     </div>
                     <div class="form-group mb-3">
                         <label for="tgl_lahir">Tanggal Lahir <span class="text-danger">*</span></label>
-                        <input type="text" class="js-flatpickr form-control bg-white @error('tgl_lahir') is-invalid @enderror" id="tgl_lahir" name="tgl_lahir" placeholder="d-m-Y" data-date-format="d-m-Y">
+                        <input type="text" class="js-flatpickr form-control bg-white @error('tgl_lahir') is-invalid @enderror" id="tgl_lahir" name="tgl_lahir" placeholder="Y-m-d" data-date-format="Y-m-d">
                     </div>
                     <div class="form-group mb-3">
                         <label for="jenis_kelamin">Jenis Kelamin <span class="text-danger">*</span></label>

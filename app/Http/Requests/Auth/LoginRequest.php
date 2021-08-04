@@ -50,7 +50,7 @@ class LoginRequest extends FormRequest
             RateLimiter::hit($this->throttleKey());
 
             throw ValidationException::withMessages([
-                'email / password salah',
+                'Password yang anda masukan salah',
             ]);
         }
 
