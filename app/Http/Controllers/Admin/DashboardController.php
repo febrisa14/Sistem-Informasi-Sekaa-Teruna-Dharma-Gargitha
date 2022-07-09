@@ -19,8 +19,8 @@ class DashboardController extends Controller
 
         // $pemasukan = DB::table('kas')->select(DB::raw('sum(nominal) as total'))->where('type','=','Pemasukan')->get();
         // $pengeluaran = DB::table('kas')->select(DB::raw('sum(nominal) as total'))->where('type','=','Pengeluaran')->get();
-        $pemasukan = Kas::where('type','=','Pemasukan')->sum('nominal');
-        $pengeluaran = Kas::where('type','=','Pengeluaran')->sum('nominal');
+        $pemasukan = DB::table('kas')->where('type','=','Pemasukan')->sum('nominal');
+        $pengeluaran = DB::table('kas')->where('type','=','Pengeluaran')->sum('nominal');
         $saldo = $pemasukan - $pengeluaran;
         return view('dashboard', [
             'title' => 'Admin Dashboard | Sistem Informasi Sekaa Teruna Dharma Gargitha',
