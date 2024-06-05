@@ -1,0 +1,60 @@
+{
+    "version": 2,
+    "framework": null,
+    "functions": {
+        "api/index.php": {
+            "runtime": "vercel-php@0.5.3"
+        }
+    },
+    "routes": [
+        {
+            "src": "/auth/(.*)",
+            "dest": "/public/auth/"
+        },
+        {
+            "src": "/assets/(.*)",
+            "dest": "/public/assets/"
+        },
+        {
+            "src": "/avatar/(.*)",
+            "dest": "/public/avatar/"
+        },
+        {
+            "src": "/baju/(.*)",
+            "dest": "/public/baju/"
+        },
+        {
+            "src": "/doc/(.*)",
+            "dest": "/public/doc/"
+        },
+        {
+            "src": "/fonts/(.*)",
+            "dest": "/public/fonts/"
+        },
+        {
+            "src": "/(.*)",
+            "dest": "/api/index.php"
+        }
+    ],
+    "env": {
+        "APP_NAME": "SISTDG",
+        "APP_ENV": "production",
+        "APP_DEBUG": "true",
+        "DB_HOST": "ep-round-smoke-a188dv31.ap-southeast-1.aws.neon.tech",
+        "DB_PORT": "5432",
+        "DB_DATABASE": "sistdg",
+        "DB_USERNAME": "sistdg_owner",
+        "DB_PASSWORD": "ih2T7fWtzZFP",
+        "APP_CONFIG_CACHE": "/tmp/config.php",
+        "APP_EVENTS_CACHE": "/tmp/events.php",
+        "APP_PACKAGES_CACHE": "/tmp/packages.php",
+        "APP_ROUTES_CACHE": "/tmp/routes.php",
+        "APP_SERVICES_CACHE": "/tmp/services.php",
+        "VIEW_COMPILED_PATH": "/tmp",
+        "CACHE_DRIVER": "array",
+        "LOG_CHANNEL": "stderr",
+        "SESSION_DRIVER": "cookie",
+        "SSR_TEMP_PATH": "/tmp/ssr",
+        "NODE_PATH": "node"
+    }
+}

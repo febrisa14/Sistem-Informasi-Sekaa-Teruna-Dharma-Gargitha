@@ -2,9 +2,9 @@
 
 namespace App\Rules;
 
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Contracts\Validation\Rule;
-use Hash;
-use Auth;
 
 class MatchOldPassword implements Rule
 {
